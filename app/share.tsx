@@ -1,7 +1,25 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, Platform } from 'react-native';
+
+// Resolve asset source for web download
+const qrImage = require('../assets/images/qr-equimood.png');
+const qrImageSource = Image.resolveAssetSource(qrImage);
 
 export default function ShareScreen() {
+  const handleDownload = () => {
+    if (Platform.OS === 'web') {
+      const link = document.createElement('a');
+      link.href = qrImageSource.uri;
+      link.download = 'qr-equimood.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      // For native, one might use Share API or MediaLibrary
+      console.log('Download not implemented for this platform');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Partager Equimood</Text>
@@ -9,13 +27,19 @@ export default function ShareScreen() {
         Scannez ce QR code pour accéder à Equimood sur votre téléphone ou partagez-le autour de vous !
       </Text>
       <Image
-        source={require('../assets/images/qr-equimood.png')}
+        source={qrImage}
         style={styles.qr}
         resizeMode="contain"
       />
       <Text selectable style={styles.url}>
         https://equimood.netlify.app
       </Text>
+
+      {Platform.OS === 'web' && (
+        <Pressable style={styles.downloadButton} onPress={handleDownload}>
+          <Text style={styles.downloadButtonText}>Télécharger le QR</Text>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -50,5 +74,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#2C2C2C',
     textAlign: 'center',
+    marginBottom: 24, // Add margin to separate from the button
+  },
+  downloadButton: {
+    backgroundColor: '#C6A45D',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 30,
+    marginTop: 16,
+  },
+  downloadButtonText: {
+    color: '#FEFBF7',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

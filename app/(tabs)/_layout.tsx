@@ -151,7 +151,7 @@ export default function TabsLayout() {
                   width: 38, 
                   height: 38,
                   // remonter légèrement l'image pour éviter que le cheval soit coupé
-                  marginTop: focused ? -4 : -2,
+                  marginTop: focused ? -8 : -6,
                 }}
                 resizeMode="contain"
               />
