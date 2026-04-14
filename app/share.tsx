@@ -9,7 +9,7 @@ export default function ShareScreen() {
         Scannez ce QR code pour accéder à Equimood sur votre téléphone ou partagez-le autour de vous !
       </Text>
       <Image
-        source={require('../../assets/images/qr-equimood.png')}
+        source={require('../assets/images/qr-equimood.png')}
         style={styles.qr}
         resizeMode="contain"
       />
