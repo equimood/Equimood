@@ -52,8 +52,13 @@ export default function HomeScreen() {
         </View>
 
         {/* Bouton Mon profil avec encore plus d'espace */}
-        <Pressable style={[styles.profileButton, { marginTop: 64, marginBottom: 44 }]} onPress={() => router.push('/profile')}>
+        <Pressable style={[styles.profileButton, { marginTop: 64 }]} onPress={() => router.push('/profile')}>
           <Text style={styles.profileButtonText}>Mon profil</Text>
+        </Pressable>
+
+        {/* Bouton pour accéder à l'écran de partage */}
+        <Pressable style={[styles.shareButton, { marginTop: 18, marginBottom: 44 }]} onPress={() => router.push('/share')}>
+          <Text style={styles.shareButtonText}>Partager</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -156,6 +161,20 @@ const styles = StyleSheet.create({
     color: '#6B4D27',
     fontSize: 13,
     fontWeight: '600',
+    textAlign: 'center',
+  },
+  shareButton: {
+    alignSelf: 'center',
+    backgroundColor: '#C6A45D',
+    paddingVertical: 10,
+    paddingHorizontal: 26,
+    borderRadius: 24,
+    marginTop: 8,
+  },
+  shareButtonText: {
+    color: '#FEFBF7',
+    fontSize: 14,
+    fontWeight: '700',
     textAlign: 'center',
   },
 });

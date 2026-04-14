@@ -157,6 +157,18 @@ export default function TabsLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="share"
+        options={{
+          title: 'Partager',
+          tabBarIcon: ({ color, focused }) => (
+            <TabIconWithGlow focused={focused}>
+              <Ionicons name={focused ? 'share-social' : 'share-social-outline'} size={24} color={color} />
+            </TabIconWithGlow>
+          ),
+        }}
+      />
     </Tabs>
   );
 }
