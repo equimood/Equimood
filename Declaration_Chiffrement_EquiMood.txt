@@ -1,0 +1,18 @@
+Déclaration sur l’utilisation du chiffrement – Application EquiMood
+
+Objectif de l’application
+EquiMood est une application mobile destinée à accompagner les cavaliers dans la gestion de leurs émotions et de leur bien-être grâce à des outils de journal, des exercices de respiration, des conseils d’experts et une bibliothèque de ressources.
+
+Déclaration de chiffrement
+Je soussigné(e), déclare que l’application EquiMood n’utilise aucun algorithme de chiffrement propriétaire ou non exempté.
+L’application utilise uniquement les protocoles standards (par exemple HTTPS/TLS/SSL) fournis par Apple et React Native.
+
+Résumé technique
+| Élément                  | Détail                |
+|--------------------------|-----------------------|
+| Type de chiffrement      | HTTPS (TLS/SSL)       |
+| Fournisseur              | Apple/React Native    |
+| Chiffrement propriétaire | Non                   |
+
+Fait à Paris, le 19 mars 2026
+[Colli, Créatrice EquiMood, Emilie Colli]

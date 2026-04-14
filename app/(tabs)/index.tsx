@@ -1,31 +1,161 @@
-import { StyleSheet } from 'react-native';
+import { Spacing } from '@/constants/theme';
+import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+export default function HomeScreen() {
+  const router = useRouter();
+  const pulseAnim = useSharedValue(1);
 
-export default function TabOneScreen() {
+  useEffect(() => {
+    pulseAnim.value = withRepeat(
+      withSequence(
+        withTiming(1.15, { duration: 1500 }),
+        withTiming(1, { duration: 1500 })
+      ),
+      -1, // infinite
+      true // reverse
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: pulseAnim.value }],
+  }));
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <SafeAreaView style={styles.container} edges={[]}>
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+
+        {/* Logo animé centré (œil de la jument) */}
+        <View style={styles.logoContainer}>
+          <Animated.View style={[styles.imageWrapper, animatedStyle]}>
+            <Image 
+              source={require('@/assets/images/oeil_duduche.png')}
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
+          </Animated.View>
+        </View>
+
+        {/* Second paragraphe */}
+        <View style={styles.textBlock}>
+          <Text style={styles.introText}>
+            Avec EquiMood, transforme tes émotions en confiance et fais de ton mental ton plus grand allié.
+          </Text>
+        </View>
+
+        {/* Slogan déplacé en bas */}
+        <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 0 }}>
+          <Text style={styles.slogan}>« Ce que tu ressens, il le reflète. »</Text>
+        </View>
+
+        {/* Bouton Mon profil avec encore plus d'espace */}
+        <Pressable style={[styles.profileButton, { marginTop: 64, marginBottom: 44 }]} onPress={() => router.push('/profile')}>
+          <Text style={styles.profileButtonText}>Mon profil</Text>
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFCF7',
+  },
+  content: {
+    flexGrow: 1,
+    paddingHorizontal: Spacing.lg,
+    paddingTop: 80, // Ajoute un espace en haut pour descendre le contenu
+    paddingBottom: Spacing.xl * 3,
+  },
+  topLogoContainer: {
+    alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 20,
+  },
+  centerLogoContainer: {
+    alignItems: 'center',
+    marginTop: -10,
+    marginBottom: -5,
+  },
+  headerLogo: {
+    width: 95,
+    height: 95,
+  },
+  slogan: {
+    fontSize: 19,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontStyle: 'italic',
+    color: '#C9A86A',
+    marginTop: 22,
+    marginBottom: 0,
+    textAlign: 'center',
+  },
+  welcomeText: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: '#6B4D27',
+    textAlign: 'center',
+    paddingHorizontal: Spacing.lg,
+    marginBottom: 0,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontWeight: '700',
+  },
+  textBlock: {
+    alignItems: 'center',
+    marginBottom: 15,
+    marginTop: 10,
+  },
+  introText: {
+    fontSize: 15,
+    lineHeight: 22,
+    color: '#8B6D47',
+    textAlign: 'center',
+    paddingHorizontal: Spacing.lg,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    letterSpacing: 0.5,
+  },
+  logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 15,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  imageWrapper: {
+    width: 230,
+    height: 230,
+    borderRadius: 115,
+    overflow: 'hidden',
+    borderWidth: 4,
+    borderColor: '#C9A86A',
+    shadowColor: '#C9A86A',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 15,
+    elevation: 10,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  logoImage: {
+    width: 230,
+    height: 230,
+  },
+  profileButton: {
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    borderColor: '#6B4D27',
+    paddingVertical: 8,
+    paddingHorizontal: 24,
+    borderRadius: 20,
+    marginTop: 8,
+    marginBottom: 35,
+  },
+  profileButtonText: {
+    color: '#6B4D27',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });
