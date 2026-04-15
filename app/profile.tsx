@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as FileSystem from 'expo-file-system/legacy';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
@@ -12,7 +13,6 @@ export default function ProfileScreen() {
   const [photo, setPhoto] = useState<string | null>(null);
   const [discipline, setDiscipline] = useState('');
 
-  // Charger les données sauvegardées
   useEffect(() => {
     loadProfile();
   }, []);
@@ -31,38 +31,44 @@ export default function ProfileScreen() {
     }
   };
 
-  const saveProfile = async () => {
+  const saveProfile = async (photoUri?: string) => {
     try {
-      const profile = {
-        nomCavaliere,
-        photo,
-        discipline,
-      };
+      const profile = { nomCavaliere, photo: photoUri ?? photo, discipline };
       await AsyncStorage.setItem('userProfile', JSON.stringify(profile));
       Alert.alert('Profil sauvegardé', 'Tes informations ont été enregistrées ✨');
     } catch (error) {
-      console.error('Erreur sauvegarde profil:', error);
       Alert.alert('Erreur', 'Impossible de sauvegarder le profil');
     }
   };
 
   const pickImage = async () => {
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert("Permission refusée", "Autorisez l'accès à la galerie.");
+      return;
+    }
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
-      quality: 0.8,
+      aspect: [1, 1],
+      quality: 0.85,
     });
-
     if (!result.canceled && result.assets[0]) {
-      setPhoto(result.assets[0].uri);
+      const tempUri = result.assets[0].uri;
+      // Convertir en base64 pour que l'image soit accessible partout sur iOS
+      const base64 = await FileSystem.readAsStringAsync(tempUri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+      const dataUri = `data:image/jpeg;base64,${base64}`;
+      setPhoto(dataUri);
+      await saveProfile(dataUri);
     }
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} style={styles.backButton}>
+        <Pressable onPress={() => router.push('/(tabs)')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={28} color="#2C2416" />
         </Pressable>
         <Text style={styles.headerTitle}>Mon profil</Text>
@@ -70,12 +76,8 @@ export default function ProfileScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Section unique */}
         <View style={styles.section}>
-          <Pressable 
-            style={styles.photoButton} 
-            onPress={pickImage}
-          >
+          <Pressable style={styles.photoButton} onPress={pickImage}>
             {photo ? (
               <Image source={{ uri: photo }} style={styles.photo} />
             ) : (
@@ -85,6 +87,20 @@ export default function ProfileScreen() {
               </View>
             )}
           </Pressable>
+
+          {photo && (
+            <Pressable
+              style={styles.deletePhotoButton}
+              onPress={() => {
+                setPhoto(null);
+                const profile = { nomCavaliere, photo: null, discipline };
+                AsyncStorage.setItem('userProfile', JSON.stringify(profile));
+              }}
+            >
+              <Ionicons name="trash-outline" size={16} color="#A69580" />
+              <Text style={styles.deletePhotoText}>Supprimer la photo</Text>
+            </Pressable>
+          )}
 
           <TextInput
             style={styles.input}
@@ -103,8 +119,7 @@ export default function ProfileScreen() {
           />
         </View>
 
-        {/* Bouton sauvegarder */}
-        <Pressable style={styles.saveButton} onPress={saveProfile}>
+        <Pressable style={styles.saveButton} onPress={() => saveProfile()}>
           <Text style={styles.saveButtonText}>💾 Sauvegarder</Text>
         </Pressable>
       </ScrollView>
@@ -113,10 +128,7 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFCF7',
-  },
+  container: { flex: 1, backgroundColor: '#FFFCF7' },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -126,42 +138,27 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E5DDD0',
   },
-  backButton: {
-    padding: 4,
-  },
+  backButton: { padding: 4 },
   headerTitle: {
     fontSize: 24,
     fontWeight: '700',
     color: '#2C2416',
     fontFamily: 'PlayfairDisplay_700Bold',
   },
-  content: {
-    padding: 20,
-  },
-  section: {
-    marginBottom: 40,
-  },
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#2C2416',
-    marginBottom: 20,
-  },
-  photoButton: {
-    alignSelf: 'center',
-    marginBottom: 20,
-  },
+  content: { padding: 20 },
+  section: { marginBottom: 40 },
+  photoButton: { alignSelf: 'center', marginBottom: 20 },
   photo: {
     width: 200,
     height: 200,
-    borderRadius: 12,
+    borderRadius: 100,
     borderWidth: 3,
     borderColor: '#8B6D47',
   },
   photoPlaceholder: {
     width: 200,
     height: 200,
-    borderRadius: 12,
+    borderRadius: 100,
     backgroundColor: '#F5F0E8',
     borderWidth: 2,
     borderColor: '#E5DDD0',
@@ -185,14 +182,6 @@ const styles = StyleSheet.create({
     borderColor: '#E5DDD0',
     marginBottom: 16,
   },
-  infoText: {
-    fontSize: 14,
-    color: '#8B6D47',
-    fontStyle: 'italic',
-    textAlign: 'center',
-    marginTop: 8,
-    lineHeight: 20,
-  },
   saveButton: {
     backgroundColor: '#8B6D47',
     borderRadius: 16,
@@ -205,9 +194,19 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 4,
   },
-  saveButtonText: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#FFFCF7',
+  saveButtonText: { fontSize: 18, fontWeight: '700', color: '#FFFCF7' },
+  deletePhotoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    alignSelf: 'center',
+    marginTop: 8,
+    marginBottom: 16,
+    padding: 8,
+  },
+  deletePhotoText: {
+    fontSize: 13,
+    color: '#A69580',
   },
 });

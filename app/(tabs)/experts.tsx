@@ -69,11 +69,13 @@ export default function ExpertsScreen() {
               Découvre bientôt l'interview exclusive de cette experte équestre
             </Text>
             
-            {/* Bouton pour ouvrir la vidéo */}
+            {/* Le bouton pour ouvrir la vidéo est maintenant masqué */}
+            {/* 
             <Pressable style={styles.watchButton} onPress={openVideo}>
               <Ionicons name="play-circle" size={24} color="#FFFCF7" />
               <Text style={styles.watchButtonText}>Voir l'interview</Text>
             </Pressable>
+            */}
           </View>
         </View>
       </ScrollView>

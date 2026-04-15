@@ -1,22 +1,27 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable, Platform } from 'react-native';
+import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
 // Resolve asset source for web download
 const qrImage = require('../assets/images/qr-equimood.png');
-const qrImageSource = Image.resolveAssetSource(qrImage);
 
 export default function ShareScreen() {
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (Platform.OS === 'web') {
-      const link = document.createElement('a');
-      link.href = qrImageSource.uri;
-      link.download = 'qr-equimood.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      // For native, one might use Share API or MediaLibrary
-      console.log('Download not implemented for this platform');
+      try {
+        const response = await fetch(Image.resolveAssetSource(qrImage).uri);
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'qr-equimood.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      } catch {
+        // Fallback : ouvrir dans un nouvel onglet
+        window.open(Image.resolveAssetSource(qrImage).uri, '_blank');
+      }
     }
   };
 

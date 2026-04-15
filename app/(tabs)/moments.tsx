@@ -49,6 +49,7 @@ const pendantModules: Module[] = [
 // ========== APRÈS ==========
 const apresModules: Module[] = [
   { id: 12, title: 'Débrief émotionnel', duration: '', available: false, type: 'audio' },
+  { id: 16, title: 'Se libérer d\'une mauvaise expérience', duration: '', available: true, type: 'audio' },
   { id: 14, title: 'Se féliciter — renforcer la confiance', duration: '', available: false, type: 'audio' },
   { id: 15, title: 'Lâcher la déception', duration: '', available: false, type: 'audio' },
 ];
@@ -159,6 +160,14 @@ export default function CompetitionScreen() {
       setCurrentModule({
         title: moduleTitle,
         audioFile: require('@/assets/audio/concentration_express_pendant.mp3'),
+      });
+      setIsPlayerVisible(true);
+    }
+    // Module 16 : "Se libérer d'une mauvaise expérience"
+    else if (moduleId === 16) {
+      setCurrentModule({
+        title: moduleTitle,
+        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience.mp3'),
       });
       setIsPlayerVisible(true);
     } else {

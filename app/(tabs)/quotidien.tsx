@@ -36,6 +36,7 @@ const stressModules: Module[] = [
   { id: 5, title: 'Stress avant une séance', duration: '', available: false, type: 'audio' },
   { id: 7, title: 'Le regard des autres', duration: '', available: true, type: 'audio' },
   { id: 8, title: 'La peur de décevoir', duration: '', available: true, type: 'audio' },
+  { id: 9, title: 'Se libérer d\'une mauvaise expérience', duration: '', available: true, type: 'audio' },
 ];
 
 // 3. CONCENTRATION
@@ -142,6 +143,14 @@ export default function QuotidienScreen() {
       setCurrentModule({
         title: moduleTitle,
         audioFile: require('@/assets/audio/peur_de_decevoir.mp3'),
+      });
+      setIsPlayerVisible(true);
+    }
+    // Module 9 : "Se libérer d'une mauvaise expérience"
+    else if (moduleId === 9) {
+      setCurrentModule({
+        title: moduleTitle,
+        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience.mp3'),
       });
       setIsPlayerVisible(true);
     } else {

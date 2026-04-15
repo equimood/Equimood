@@ -142,17 +142,12 @@ export default function TabsLayout() {
           title: 'Côté pros',
           tabBarIcon: ({ color, focused }) => (
             <TabIconWithGlow focused={focused}>
-              <Image 
-                source={focused 
+              <Image
+                source={focused
                   ? require('@/assets/images/logo_pros_plein-1.png')
                   : require('@/assets/images/logo_pros_transp.png')
                 }
-                style={{ 
-                  width: 38, 
-                  height: 38,
-                  // remonter légèrement l'image pour éviter que le cheval soit coupé
-                  marginTop: focused ? -8 : -6,
-                }}
+                style={{ width: 38, height: 38 }}
                 resizeMode="contain"
               />
             </TabIconWithGlow>
@@ -163,12 +158,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="share"
         options={{
-          title: 'Partager',
-          tabBarIcon: ({ color, focused }) => (
-            <TabIconWithGlow focused={focused}>
-              <Ionicons name={focused ? 'share-social' : 'share-social-outline'} size={24} color={color} />
-            </TabIconWithGlow>
-          ),
+          href: null, // Masqué de la tab bar, accessible via bouton dans l'accueil
         }}
       />
     </Tabs>

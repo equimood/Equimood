@@ -1,19 +1,46 @@
 import { Colors, Spacing, Typography } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { Audio } from 'expo-av';
-import React, { useEffect, useState } from 'react';
-import { Dimensions, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width, height } = Dimensions.get('window');
 
+// SVG Path for the heart shape
+const heartPath = "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+
 export default function RespirationScreen() {
   const breathAnimation = useSharedValue(1);
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const soundRef = useRef<Audio.Sound | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [userPhoto, setUserPhoto] = useState<string | null>(null);
 
+  useFocusEffect(
+    useCallback(() => {
+      const loadProfile = async () => {
+        try {
+          const storedProfile = await AsyncStorage.getItem('userProfile');
+          if (storedProfile) {
+            const profile = JSON.parse(storedProfile);
+            if (profile.photo) {
+              setUserPhoto(profile.photo);
+            } else {
+              setUserPhoto(null);
+            }
+          }
+        } catch (error) {
+          console.error("Erreur lors du chargement du profil :", error);
+        }
+      };
+      loadProfile();
+    }, [])
+  );
+
+  // Animation effect
   useEffect(() => {
     breathAnimation.value = withRepeat(
       withSequence(
@@ -23,69 +50,60 @@ export default function RespirationScreen() {
       -1,
       true
     );
+  }, [breathAnimation]);
+
+  // Sound cleanup effect
+  useEffect(() => {
+    // This function is called when the component unmounts.
+    return () => {
+      if (soundRef.current) {
+        console.log('Unloading sound...');
+        soundRef.current.unloadAsync();
+      }
+    };
   }, []);
+
+  const togglePlayPause = async () => {
+    try {
+      // If sound is already loaded
+      if (soundRef.current) {
+        const status = await soundRef.current.getStatusAsync();
+        if (status.isLoaded) {
+          if (isPlaying) {
+            await soundRef.current.pauseAsync();
+            setIsPlaying(false);
+          } else {
+            await soundRef.current.playAsync();
+            setIsPlaying(true);
+          }
+          return;
+        }
+      }
+
+      // If sound is not loaded, create and play it for the first time
+      console.log('Loading sound for the first time...');
+      await Audio.setAudioModeAsync({
+        playsInSilentModeIOS: true,
+        staysActiveInBackground: false, // Important for not playing in background
+        shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: false,
+      });
+
+      const { sound } = await Audio.Sound.createAsync(
+        require('@/assets/audio/respirer.mp3'),
+        { shouldPlay: true, isLooping: true }
+      );
+      soundRef.current = sound;
+      setIsPlaying(true);
+
+    } catch (error) {
+      console.error('Audio error:', error);
+    }
+  };
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: breathAnimation.value }],
   }));
-
-  // Arrêter et réinitialiser la musique quand on quitte l'onglet
-  useFocusEffect(
-    React.useCallback(() => {
-      // Fonction appelée quand on arrive sur l'onglet
-      return () => {
-        // Fonction appelée quand on QUITTE l'onglet
-        const stopAndReset = async () => {
-          if (sound) {
-            try {
-              await sound.stopAsync();
-              await sound.setPositionAsync(0);
-              await sound.unloadAsync();
-              setSound(null);
-              setIsPlaying(false);
-            } catch (error) {
-              console.error('Erreur lors de l\'arrêt:', error);
-            }
-          }
-        };
-        stopAndReset();
-      };
-    }, [sound])
-  );
-
-  const togglePlayPause = async () => {
-    try {
-      if (sound) {
-        const status = await sound.getStatusAsync();
-        if (status.isLoaded) {
-          if (isPlaying) {
-            await sound.pauseAsync();
-            setIsPlaying(false);
-          } else {
-            // Remettre à zéro avant de jouer
-            await sound.setPositionAsync(0);
-            await sound.playAsync();
-            setIsPlaying(true);
-          }
-        }
-      } else {
-        // Créer et lancer le son la première fois
-        await Audio.setAudioModeAsync({
-          playsInSilentModeIOS: true,
-          staysActiveInBackground: false,
-        });
-        
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          require('@/assets/audio/respirer.mp3'),
-          { shouldPlay: true, isLooping: true }
-        );
-        setSound(newSound);
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.error('Erreur audio:', error);
-    }
-  };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -103,7 +121,15 @@ export default function RespirationScreen() {
             style={[styles.breathCircle, animatedStyle]}
           >
             <View style={styles.innerCircle}>
-              <Ionicons name="heart" size={110} color="#D4A5A5" />
+              {userPhoto ? (
+                <Image
+                  source={{ uri: userPhoto }}
+                  style={styles.profilePhoto}
+                  resizeMode="cover"
+                />
+              ) : (
+                <Ionicons name="heart" size={110} color="#D4A5A5" />
+              )}
             </View>
           </Animated.View>
         </View>
@@ -190,6 +216,11 @@ const styles = StyleSheet.create({
     borderColor: '#D4A5A5',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  profilePhoto: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 100,
   },
   textContainer: {
     alignItems: 'center',

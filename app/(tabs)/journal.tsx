@@ -2,9 +2,9 @@ import { Colors, Typography } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
-import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import { Alert, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type JournalEntry = {
@@ -45,39 +45,33 @@ export default function JournalScreen() {
   // Charger la photo du profil
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadUserPhoto();
-    loadEntries();
-  }, []);
-
-  const loadUserPhoto = async () => {
-    try {
-      const data = await AsyncStorage.getItem('userProfile');
-      if (data) {
-        const profile = JSON.parse(data);
-        setUserPhoto(profile.photo || null);
-      }
-    } catch (error) {
-      console.log('Erreur chargement photo:', error);
-    }
-  };
-
-  const loadEntries = async () => {
-    try {
-      const data = await AsyncStorage.getItem('journalEntries');
-      if (data) {
-        const savedEntries = JSON.parse(data);
-        // Convertir les dates en objets Date
-        const entriesWithDates = savedEntries.map((entry: any) => ({
-          ...entry,
-          date: new Date(entry.date)
-        }));
-        setEntries(entriesWithDates);
-      }
-    } catch (error) {
-      console.log('Erreur chargement entrées:', error);
-    }
-  };
+  useFocusEffect(
+    useCallback(() => {
+      const loadData = async () => {
+        try {
+          // Load user photo
+          const photoData = await AsyncStorage.getItem('userProfile');
+          if (photoData) {
+            const profile = JSON.parse(photoData);
+            setUserPhoto(profile.photo || null);
+          }
+          // Load journal entries
+          const entriesData = await AsyncStorage.getItem('journalEntries');
+          if (entriesData) {
+            const savedEntries = JSON.parse(entriesData);
+            const entriesWithDates = savedEntries.map((entry: any) => ({
+              ...entry,
+              date: new Date(entry.date)
+            }));
+            setEntries(entriesWithDates);
+          }
+        } catch (error) {
+          console.log('Erreur chargement données:', error);
+        }
+      };
+      loadData();
+    }, [])
+  );
 
   const saveEntries = async (newEntries: JournalEntry[]) => {
     try {
@@ -86,24 +80,6 @@ export default function JournalScreen() {
       console.log('Erreur sauvegarde entrées:', error);
     }
   };
-
-  // Animation battement de cœur pour la photo/mascotte
-  const heartbeatAnim = useSharedValue(1);
-
-  useEffect(() => {
-    heartbeatAnim.value = withRepeat(
-      withSequence(
-        withTiming(1.08, { duration: 800 }),
-        withTiming(1, { duration: 800 })
-      ),
-      -1,
-      true
-    );
-  }, []);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: heartbeatAnim.value }],
-  }));
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('fr-FR', {
@@ -195,16 +171,16 @@ export default function JournalScreen() {
 
       {/* Photo permanente en en-tête */}
       {userPhoto && (
-        <Animated.View style={[styles.photoHeader, animatedStyle]}>
+        <View style={styles.photoHeader}>
           <Image 
             source={{ uri: userPhoto }} 
             style={styles.profilePhotoHeader}
             resizeMode="cover"
           />
-        </Animated.View>
+        </View>
       )}
 
-      <ScrollView style={styles.listContainer}>
+      <ScrollView style={styles.listContainer} bounces={false} overScrollMode="never">
         {entries.length === 0 ? (
           <View style={styles.emptyState}>
             <Text style={styles.emptyText}>Aucune entrée pour le moment</Text>
@@ -412,22 +388,16 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFCF7' },
   header: { alignItems: 'center', paddingTop: 8, paddingBottom: 16, marginBottom: 24 },
   headerContent: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  photoHeader: { 
-    alignItems: 'center', 
+  photoHeader: {
+    alignItems: 'center',
     marginBottom: 20,
-    paddingHorizontal: 20,
   },
-  profilePhotoHeader: { 
-    width: 120, 
-    height: 120, 
-    borderRadius: 60, 
-    borderWidth: 3, 
-    borderColor: '#C9A86A',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
+  profilePhotoHeader: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: '#D4A5A5',
   },
   mascotteContainer: { alignItems: 'center', marginBottom: 16, marginTop: -20 },
   mascotte: { width: 250, height: 250 },
