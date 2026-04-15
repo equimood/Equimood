@@ -1,6 +1,6 @@
 [build]
   command = "yarn build:web"
-  publish = "web-build"
+  publish = "dist"
 
 [context.production.environment]
   EXPO_WEB_BUNDLE = "true"
