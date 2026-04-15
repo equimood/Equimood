@@ -30,6 +30,7 @@ export default function JournalScreen() {
   const [displayLimit, setDisplayLimit] = useState(10);
   const [showModal, setShowModal] = useState(false);
   const [showApresSeance, setShowApresSeance] = useState(false);
+  const [filtreActif, setFiltreActif] = useState<'Tout' | 'Maison' | 'Concours'>('Tout');
   
   const [lieu, setLieu] = useState<'Maison' | 'Concours'>('Maison');
   const [intention, setIntention] = useState('');
@@ -160,57 +161,109 @@ export default function JournalScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.title}>Mon Journal</Text>
-          <Text style={styles.subtitle}>Retrace ton évolution, séance après séance.</Text>
+        <Text style={styles.title}>Mon Journal</Text>
+        <Text style={styles.subtitle}>Retrace ton évolution, séance après séance.</Text>
+
+        {/* Carnet de journal vertical */}
+        <View style={styles.journalCover}>
+          {/* Spirale à gauche */}
+          <View style={styles.spiralStrip}>
+            {[...Array(7)].map((_, i) => (
+              <View key={i} style={styles.spiralDot} />
+            ))}
+          </View>
+          {/* Page du journal */}
+          <View style={styles.journalPage}>
+            <Text style={styles.journalDate}>
+              {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+            </Text>
+            {userPhoto ? (
+              <Image
+                source={{ uri: userPhoto }}
+                style={styles.profilePhotoHeader}
+                resizeMode="cover"
+              />
+            ) : (
+              <View style={styles.photoPlaceholderJournal}>
+                <Ionicons name="image-outline" size={40} color="#D4A5A5" />
+              </View>
+            )}
+            <Text style={styles.journalLineText}>✦ Ma séance du jour ✦</Text>
+          </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-          {userPhoto && (
-            <Image
-              source={{ uri: userPhoto }}
-              style={styles.profilePhotoHeader}
-              resizeMode="cover"
-            />
-          )}
-          <Pressable onPress={handleNouvelleEntree} style={styles.addButton}>
-            <Ionicons name="add-circle" size={36} color="#8B6D47" />
-          </Pressable>
-        </View>
+
+        <Pressable onPress={handleNouvelleEntree} style={styles.addButton}>
+          <Ionicons name="add-circle" size={36} color="#8B6D47" />
+        </Pressable>
       </View>
 
       <ScrollView style={styles.listContainer} bounces={false} overScrollMode="never">
-        {entries.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyText}>Aucune entrée pour le moment</Text>
-            <Text style={styles.emptySubtext}>Appuyez sur + pour créer votre première entrée</Text>
-          </View>
-        ) : (
-          <>
-            {entries.slice(0, displayLimit).map(entry => (
-              <View key={entry.id} style={styles.entryCard}>
-                <View style={styles.entryHeader}>
-                  <Text style={styles.entryDate}>{formatDate(entry.date)}</Text>
-                  <View style={[styles.badge, entry.lieu === 'Concours' && styles.badgeConcours]}>
-                    <Text style={styles.badgeText}>{entry.lieu}</Text>
+        {/* Filtres */}
+        <View style={styles.filtreContainer}>
+          <Pressable
+            style={[styles.filtreBtn, filtreActif === 'Tout' && styles.filtreBtnActif]}
+            onPress={() => { setFiltreActif('Tout'); setDisplayLimit(10); }}
+          >
+            <Ionicons name="list" size={16} color={filtreActif === 'Tout' ? '#FFFCF7' : '#8B6D47'} />
+            <Text style={[styles.filtreBtnText, filtreActif === 'Tout' && styles.filtreBtnTextActif]}>Tout</Text>
+          </Pressable>
+
+          <Pressable
+            style={[styles.filtreBtn, filtreActif === 'Maison' && styles.filtreBtnActif]}
+            onPress={() => { setFiltreActif('Maison'); setDisplayLimit(10); }}
+          >
+            <Image
+              source={filtreActif === 'Maison'
+                ? require('@/assets/images/logo_alamaison_transparent.png')
+                : require('@/assets/images/logo_alamaison.png')
+              }
+              style={{ width: 18, height: 18 }}
+              resizeMode="contain"
+            />
+            <Text style={[styles.filtreBtnText, filtreActif === 'Maison' && styles.filtreBtnTextActif]}>Maison</Text>
+          </Pressable>
+
+          <Pressable
+            style={[styles.filtreBtn, filtreActif === 'Concours' && styles.filtreBtnActif]}
+            onPress={() => { setFiltreActif('Concours'); setDisplayLimit(10); }}
+          >
+            <Ionicons name={filtreActif === 'Concours' ? 'trophy' : 'trophy-outline'} size={16} color={filtreActif === 'Concours' ? '#FFFCF7' : '#8B6D47'} />
+            <Text style={[styles.filtreBtnText, filtreActif === 'Concours' && styles.filtreBtnTextActif]}>Concours</Text>
+          </Pressable>
+        </View>
+
+        {(() => {
+          const filtered = filtreActif === 'Tout' ? entries : entries.filter(e => e.lieu === filtreActif);
+          if (filtered.length === 0) return (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyText}>Aucune entrée pour le moment</Text>
+              <Text style={styles.emptySubtext}>Appuyez sur + pour créer votre première entrée</Text>
+            </View>
+          );
+          return (
+            <>
+              {filtered.slice(0, displayLimit).map(entry => (
+                <View key={entry.id} style={styles.entryCard}>
+                  <View style={styles.entryHeader}>
+                    <Text style={styles.entryDate}>{formatDate(entry.date)}</Text>
+                    <View style={[styles.badge, entry.lieu === 'Concours' && styles.badgeConcours]}>
+                      <Text style={styles.badgeText}>{entry.lieu}</Text>
+                    </View>
                   </View>
+                  <Text style={styles.entryNote}>Note: {entry.noteGlobale}/10</Text>
+                  <Text style={styles.entryFocus}>Focus: {entry.focusTechnique.join(', ')}</Text>
+                  <Text style={styles.entryIntention} numberOfLines={2}>{entry.intention}</Text>
                 </View>
-                <Text style={styles.entryNote}>Note: {entry.noteGlobale}/10</Text>
-                <Text style={styles.entryFocus}>Focus: {entry.focusTechnique.join(', ')}</Text>
-                <Text style={styles.entryIntention} numberOfLines={2}>{entry.intention}</Text>
-              </View>
-            ))}
-            
-            {entries.length > displayLimit && (
-              <Pressable 
-                style={styles.loadMoreButton}
-                onPress={() => setDisplayLimit(prev => prev + 10)}
-              >
-                <Text style={styles.loadMoreText}>Voir plus d'entrées</Text>
-                <Ionicons name="chevron-down" size={20} color="#8B6D47" />
-              </Pressable>
-            )}
-          </>
-        )}
+              ))}
+              {filtered.length > displayLimit && (
+                <Pressable style={styles.loadMoreButton} onPress={() => setDisplayLimit(prev => prev + 10)}>
+                  <Text style={styles.loadMoreText}>Voir plus d'entrées</Text>
+                  <Ionicons name="chevron-down" size={20} color="#8B6D47" />
+                </Pressable>
+              )}
+            </>
+          );
+        })()}
       </ScrollView>
 
       <Modal visible={showModal} animationType="slide" presentationStyle="pageSheet">
@@ -385,12 +438,10 @@ export default function JournalScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFCF7' },
   header: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 16,
+    paddingTop: 16,
+    paddingBottom: 12,
     marginBottom: 8,
   },
   headerContent: { flexDirection: 'row', alignItems: 'center', gap: 12 },
@@ -399,12 +450,70 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profilePhotoHeader: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 160,
+    height: 120,
+    borderRadius: 10,
     overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: '#D4A5A5',
+    borderWidth: 1,
+    borderColor: '#E5D5C5',
+    marginVertical: 10,
+  },
+  journalCover: {
+    flexDirection: 'row',
+    marginTop: 16,
+    marginBottom: 4,
+    shadowColor: '#8B6D47',
+    shadowOffset: { width: 3, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 6,
+  },
+  spiralStrip: {
+    width: 18,
+    backgroundColor: '#C9A86A',
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    paddingVertical: 12,
+  },
+  spiralDot: {
+    width: 14,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+  },
+  journalPage: {
+    flex: 1,
+    backgroundColor: '#FFFCF7',
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+    padding: 14,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E5D5C5',
+    borderLeftWidth: 0,
+  },
+  journalDate: {
+    fontSize: 11,
+    color: '#A69580',
+    fontStyle: 'italic',
+    marginBottom: 6,
+  },
+  photoPlaceholderJournal: {
+    width: 160,
+    height: 120,
+    borderRadius: 10,
+    backgroundColor: '#F5F0E8',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  journalLineText: {
+    fontSize: 12,
+    color: '#C9A86A',
+    fontStyle: 'italic',
+    marginTop: 6,
   },
   mascotteContainer: { alignItems: 'center', marginBottom: 16, marginTop: -20 },
   mascotte: { width: 250, height: 250 },
@@ -415,7 +524,7 @@ const styles = StyleSheet.create({
     borderWidth: 3, 
     borderColor: '#C9A86A'
   },
-  headerTextContainer: { alignItems: 'center' },
+  headerTextContainer: { flex: 1, alignItems: 'flex-start' },
   title: { 
     ...Typography.titleBold,
     fontSize: 28, 
@@ -484,5 +593,35 @@ const styles = StyleSheet.create({
     fontWeight: '700', 
     color: '#8B6D47', 
     letterSpacing: -0.2 
+  },
+  filtreContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+  },
+  filtreBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+    borderRadius: 20,
+    backgroundColor: '#F5F0E8',
+    borderWidth: 1,
+    borderColor: '#E5DDD0',
+  },
+  filtreBtnActif: {
+    backgroundColor: '#8B6D47',
+    borderColor: '#8B6D47',
+  },
+  filtreBtnText: {
+    fontSize: 13,
+    color: '#8B6D47',
+    fontWeight: '600',
+  },
+  filtreBtnTextActif: {
+    color: '#FFFCF7',
   },
 });
