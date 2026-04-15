@@ -164,21 +164,19 @@ export default function JournalScreen() {
           <Text style={styles.title}>Mon Journal</Text>
           <Text style={styles.subtitle}>Retrace ton évolution, séance après séance.</Text>
         </View>
-        <Pressable onPress={handleNouvelleEntree} style={styles.addButton}>
-          <Ionicons name="add-circle" size={36} color="#8B6D47" />
-        </Pressable>
-      </View>
-
-      {/* Photo permanente en en-tête */}
-      {userPhoto && (
-        <View style={styles.photoHeader}>
-          <Image 
-            source={{ uri: userPhoto }} 
-            style={styles.profilePhotoHeader}
-            resizeMode="cover"
-          />
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+          {userPhoto && (
+            <Image
+              source={{ uri: userPhoto }}
+              style={styles.profilePhotoHeader}
+              resizeMode="cover"
+            />
+          )}
+          <Pressable onPress={handleNouvelleEntree} style={styles.addButton}>
+            <Ionicons name="add-circle" size={36} color="#8B6D47" />
+          </Pressable>
         </View>
-      )}
+      </View>
 
       <ScrollView style={styles.listContainer} bounces={false} overScrollMode="never">
         {entries.length === 0 ? (
@@ -386,7 +384,15 @@ export default function JournalScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FFFCF7' },
-  header: { alignItems: 'center', paddingTop: 8, paddingBottom: 16, marginBottom: 24 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 16,
+    marginBottom: 8,
+  },
   headerContent: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   photoHeader: {
     alignItems: 'center',
@@ -396,6 +402,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
+    overflow: 'hidden',
     borderWidth: 2,
     borderColor: '#D4A5A5',
   },
