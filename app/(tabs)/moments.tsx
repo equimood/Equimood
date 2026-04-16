@@ -49,7 +49,6 @@ const pendantModules: Module[] = [
 // ========== APRÈS ==========
 const apresModules: Module[] = [
   { id: 12, title: 'Débrief émotionnel', duration: '', available: false, type: 'audio' },
-  { id: 16, title: 'Se libérer d\'une mauvaise expérience', duration: '', available: true, type: 'audio' },
   { id: 14, title: 'Se féliciter — renforcer la confiance', duration: '', available: false, type: 'audio' },
   { id: 15, title: 'Lâcher la déception', duration: '', available: false, type: 'audio' },
 ];

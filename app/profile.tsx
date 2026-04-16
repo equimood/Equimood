@@ -55,13 +55,25 @@ export default function ProfileScreen() {
     });
     if (!result.canceled && result.assets[0]) {
       const tempUri = result.assets[0].uri;
-      // Convertir en base64 pour que l'image soit accessible partout sur iOS
-      const base64 = await FileSystem.readAsStringAsync(tempUri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-      const dataUri = `data:image/jpeg;base64,${base64}`;
-      setPhoto(dataUri);
-      await saveProfile(dataUri);
+      try {
+        // Sur iOS natif : convertir en base64 pour que l'image persiste
+        if (tempUri.startsWith('file://') || tempUri.startsWith('ph://')) {
+          const base64 = await FileSystem.readAsStringAsync(tempUri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+          const dataUri = `data:image/jpeg;base64,${base64}`;
+          setPhoto(dataUri);
+          await saveProfile(dataUri);
+        } else {
+          // Sur web ou si déjà data URI : utiliser directement
+          setPhoto(tempUri);
+          await saveProfile(tempUri);
+        }
+      } catch (e) {
+        // Fallback : utiliser l'URI directement
+        setPhoto(tempUri);
+        await saveProfile(tempUri);
+      }
     }
   };
 
