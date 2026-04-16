@@ -7,3 +7,20 @@
 
 [context.production.environment]
   EXPO_WEB_BUNDLE = "true"
+
+# Ne jamais mettre en cache le HTML → toujours la dernière version
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Ne pas mettre en cache les fichiers JS/CSS principaux
+[[headers]]
+  for = "/_expo/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
