@@ -19,8 +19,14 @@
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
-# Ne pas mettre en cache les fichiers JS/CSS principaux
+# Ne jamais mettre en cache les fichiers JS/CSS principaux
 [[headers]]
   for = "/_expo/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Ne jamais mettre en cache les fichiers audio
+[[headers]]
+  for = "/assets/audio/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
