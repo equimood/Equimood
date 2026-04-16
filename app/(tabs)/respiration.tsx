@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -77,9 +77,6 @@ export default function RespirationScreen() {
   }, []);
 
   const togglePlayPause = async () => {
-    // Sur web navigateur desktop uniquement → pas d'audio
-    if (Platform.OS === 'web' && typeof window !== 'undefined' && !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
-
     try {
       if (soundRef.current) {
         if (isPlaying) {
