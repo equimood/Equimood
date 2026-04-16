@@ -37,6 +37,17 @@ export default function RespirationScreen() {
         }
       };
       loadProfile();
+
+      // Quand on quitte l'onglet → stopper et décharger le son
+      return () => {
+        if (soundRef.current) {
+          soundRef.current.stopAsync().then(() => {
+            soundRef.current?.unloadAsync();
+            soundRef.current = null;
+          });
+          setIsPlaying(false);
+        }
+      };
     }, [])
   );
 
@@ -65,26 +76,21 @@ export default function RespirationScreen() {
 
   const togglePlayPause = async () => {
     try {
-      // If sound is already loaded
       if (soundRef.current) {
-        const status = await soundRef.current.getStatusAsync();
-        if (status.isLoaded) {
-          if (isPlaying) {
-            await soundRef.current.pauseAsync();
-            setIsPlaying(false);
-          } else {
-            await soundRef.current.playAsync();
-            setIsPlaying(true);
-          }
-          return;
+        if (isPlaying) {
+          await soundRef.current.pauseAsync();
+          setIsPlaying(false);
+        } else {
+          await soundRef.current.playAsync();
+          setIsPlaying(true);
         }
+        return;
       }
 
-      // If sound is not loaded, create and play it for the first time
-      console.log('Loading sound for the first time...');
+      // Première fois : charger et jouer
       await Audio.setAudioModeAsync({
         playsInSilentModeIOS: true,
-        staysActiveInBackground: false, // Important for not playing in background
+        staysActiveInBackground: false,
         shouldDuckAndroid: true,
         playThroughEarpieceAndroid: false,
       });
