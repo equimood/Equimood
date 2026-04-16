@@ -32,8 +32,7 @@ export const ProsTabIcon = ({ focused }: { focused: boolean }) => {
         style={{ 
           width: 38, 
           height: 38,
-          // On applique une transformation pour remonter l'image de manière forcée.
-          transform: [{ translateY: -30 }],
+          marginTop: -20,
         }}
         resizeMode="contain"
       />
