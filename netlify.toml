@@ -1,6 +1,9 @@
 [build]
-  command = "yarn build:web"
+  command = "npm install && npx expo export -p web"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 [context.production.environment]
   EXPO_WEB_BUNDLE = "true"
