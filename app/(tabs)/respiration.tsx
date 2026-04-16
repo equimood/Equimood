@@ -77,8 +77,8 @@ export default function RespirationScreen() {
   }, []);
 
   const togglePlayPause = async () => {
-    // Audio non disponible sur web
-    if (Platform.OS === 'web') return;
+    // Sur web navigateur desktop uniquement → pas d'audio
+    if (Platform.OS === 'web' && typeof window !== 'undefined' && !/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
 
     try {
       if (soundRef.current) {
@@ -152,22 +152,20 @@ export default function RespirationScreen() {
           </Text>
         </View>
 
-        {/* Bouton pause/play — mobile uniquement */}
-        {Platform.OS !== 'web' && (
-          <Pressable
-            style={({ pressed }) => [
-              styles.pauseButton,
-              pressed && styles.pauseButtonPressed,
-            ]}
-            onPress={togglePlayPause}
-          >
-            <Ionicons 
-              name={isPlaying ? 'pause-circle' : 'play-circle'} 
-              size={50} 
-              color="#8B6D47" 
-            />
-          </Pressable>
-        )}
+        {/* Bouton pause/play */}
+        <Pressable
+          style={({ pressed }) => [
+            styles.pauseButton,
+            pressed && styles.pauseButtonPressed,
+          ]}
+          onPress={togglePlayPause}
+        >
+          <Ionicons 
+            name={isPlaying ? 'pause-circle' : 'play-circle'} 
+            size={50} 
+            color="#8B6D47" 
+          />
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
