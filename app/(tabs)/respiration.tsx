@@ -40,11 +40,12 @@ export default function RespirationScreen() {
 
       // Quand on quitte l'onglet → stopper et décharger le son
       return () => {
-        if (soundRef.current) {
-          soundRef.current.stopAsync().then(() => {
-            soundRef.current?.unloadAsync();
-            soundRef.current = null;
+        const s = soundRef.current;
+        if (s) {
+          s.stopAsync().finally(() => {
+            s.unloadAsync();
           });
+          soundRef.current = null;
           setIsPlaying(false);
         }
       };
@@ -63,14 +64,15 @@ export default function RespirationScreen() {
     );
   }, [breathAnimation]);
 
-  // Sound cleanup effect
+  // Sound cleanup quand on quitte l'onglet OU l'app
   useEffect(() => {
-    // This function is called when the component unmounts.
     return () => {
       if (soundRef.current) {
-        console.log('Unloading sound...');
+        soundRef.current.stopAsync();
         soundRef.current.unloadAsync();
+        soundRef.current = null;
       }
+      setIsPlaying(false);
     };
   }, []);
 
