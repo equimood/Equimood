@@ -166,7 +166,7 @@ export default function CompetitionScreen() {
     else if (moduleId === 16) {
       setCurrentModule({
         title: moduleTitle,
-        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience.mp3'),
+        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience_def.mp3'),
       });
       setIsPlayerVisible(true);
     } else {

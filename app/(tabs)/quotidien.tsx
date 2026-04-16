@@ -150,7 +150,7 @@ export default function QuotidienScreen() {
     else if (moduleId === 9) {
       setCurrentModule({
         title: moduleTitle,
-        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience.mp3'),
+        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience_def.mp3'),
       });
       setIsPlayerVisible(true);
     } else {
