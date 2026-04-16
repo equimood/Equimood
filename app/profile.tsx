@@ -66,8 +66,20 @@ export default function ProfileScreen() {
     if (!result.canceled && result.assets[0]) {
       const tempUri = result.assets[0].uri;
       try {
-        // Sur iOS natif : convertir en base64 pour que l'image persiste
-        if (tempUri.startsWith('file://') || tempUri.startsWith('ph://')) {
+        // Sur web (blob: URL) : convertir en base64 via FileReader
+        if (tempUri.startsWith('blob:') || tempUri.startsWith('http')) {
+          const response = await fetch(tempUri);
+          const blob = await response.blob();
+          const reader = new FileReader();
+          const dataUri = await new Promise<string>((resolve, reject) => {
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          setPhoto(dataUri);
+          await saveProfile(dataUri);
+        // Sur iOS natif (file:// ou ph://) : convertir en base64 via FileSystem
+        } else if (tempUri.startsWith('file://') || tempUri.startsWith('ph://')) {
           const base64 = await FileSystem.readAsStringAsync(tempUri, {
             encoding: FileSystem.EncodingType.Base64,
           });
@@ -75,12 +87,12 @@ export default function ProfileScreen() {
           setPhoto(dataUri);
           await saveProfile(dataUri);
         } else {
-          // Sur web ou si déjà data URI : utiliser directement
+          // Déjà un data URI
           setPhoto(tempUri);
           await saveProfile(tempUri);
         }
       } catch (e) {
-        // Fallback : utiliser l'URI directement
+        // Fallback
         setPhoto(tempUri);
         await saveProfile(tempUri);
       }
