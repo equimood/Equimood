@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -75,6 +75,9 @@ export default function RespirationScreen() {
   }, []);
 
   const togglePlayPause = async () => {
+    // Audio non disponible sur web
+    if (Platform.OS === 'web') return;
+
     try {
       if (soundRef.current) {
         if (isPlaying) {
@@ -147,20 +150,22 @@ export default function RespirationScreen() {
           </Text>
         </View>
 
-        {/* Bouton pause/play discret */}
-        <Pressable
-          style={({ pressed }) => [
-            styles.pauseButton,
-            pressed && styles.pauseButtonPressed,
-          ]}
-          onPress={togglePlayPause}
-        >
-          <Ionicons 
-            name={isPlaying ? 'pause-circle' : 'play-circle'} 
-            size={50} 
-            color="#8B6D47" 
-          />
-        </Pressable>
+        {/* Bouton pause/play — mobile uniquement */}
+        {Platform.OS !== 'web' && (
+          <Pressable
+            style={({ pressed }) => [
+              styles.pauseButton,
+              pressed && styles.pauseButtonPressed,
+            ]}
+            onPress={togglePlayPause}
+          >
+            <Ionicons 
+              name={isPlaying ? 'pause-circle' : 'play-circle'} 
+              size={50} 
+              color="#8B6D47" 
+            />
+          </Pressable>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
