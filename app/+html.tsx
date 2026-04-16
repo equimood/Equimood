@@ -12,6 +12,13 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+        {/* Icône écran d'accueil iOS */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/ce_que_tu_ressens.png" />
+        <link rel="apple-touch-icon" href="/assets/images/ce_que_tu_ressens.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="EquiMood" />
+
         {/* 
           Disable body scrolling on web. This makes ScrollView components work closer to how they do on native. 
           However, body scrolling is often nice to have for mobile web. If you want to enable it, remove this line.
