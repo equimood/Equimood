@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Alert, Animated, Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ProfileScreen() {
@@ -12,6 +12,8 @@ export default function ProfileScreen() {
   const [nomCavaliere, setNomCavaliere] = useState('');
   const [photo, setPhoto] = useState<string | null>(null);
   const [discipline, setDiscipline] = useState('');
+  const [saving, setSaving] = useState(false);
+  const saveScale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     loadProfile();
@@ -33,11 +35,19 @@ export default function ProfileScreen() {
 
   const saveProfile = async (photoUri?: string) => {
     try {
+      setSaving(true);
+      // Animation tap : rétrécit puis revient
+      Animated.sequence([
+        Animated.timing(saveScale, { toValue: 0.92, duration: 100, useNativeDriver: true }),
+        Animated.timing(saveScale, { toValue: 1, duration: 150, useNativeDriver: true }),
+      ]).start();
       const profile = { nomCavaliere, photo: photoUri ?? photo, discipline };
       await AsyncStorage.setItem('userProfile', JSON.stringify(profile));
       Alert.alert('Profil sauvegardé', 'Tes informations ont été enregistrées ✨');
     } catch (error) {
       Alert.alert('Erreur', 'Impossible de sauvegarder le profil');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -131,9 +141,11 @@ export default function ProfileScreen() {
           />
         </View>
 
-        <Pressable style={styles.saveButton} onPress={() => saveProfile()}>
-          <Text style={styles.saveButtonText}>💾 Sauvegarder</Text>
-        </Pressable>
+        <Animated.View style={{ transform: [{ scale: saveScale }] }}>
+          <Pressable style={[styles.saveButton, saving && styles.saveButtonLoading]} onPress={() => saveProfile()} disabled={saving}>
+            <Text style={styles.saveButtonText}>{saving ? '⏳ Sauvegarde...' : '💾 Sauvegarder'}</Text>
+          </Pressable>
+        </Animated.View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -205,6 +217,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 4,
+  },
+  saveButtonLoading: {
+    backgroundColor: '#A69580',
   },
   saveButtonText: { fontSize: 18, fontWeight: '700', color: '#FFFCF7' },
   deletePhotoButton: {

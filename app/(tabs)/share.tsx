@@ -4,22 +4,16 @@ import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native
 const qrImage = require('@/assets/images/qr-equimood.png');
 
 export default function ShareScreen() {
-  const handleDownload = async () => {
+  const handleDownload = () => {
     if (Platform.OS === 'web') {
-      try {
-        const response = await fetch(Image.resolveAssetSource(qrImage).uri);
-        const blob = await response.blob();
-        const blobUrl = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = 'qr-equimood.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl);
-      } catch {
-        window.open(Image.resolveAssetSource(qrImage).uri, '_blank');
-      }
+      // Ouvre le QR dans un nouvel onglet → l'utilisatrice peut faire clic droit "Enregistrer"
+      const link = document.createElement('a');
+      link.href = '/assets/images/qr-equimood.png';
+      link.download = 'qr-equimood.png';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
