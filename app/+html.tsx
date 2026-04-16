@@ -13,8 +13,8 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         {/* Icône écran d'accueil iOS */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/ce_que_tu_ressens.png" />
-        <link rel="apple-touch-icon" href="/assets/images/ce_que_tu_ressens.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="EquiMood" />
