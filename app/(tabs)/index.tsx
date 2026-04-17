@@ -1,13 +1,26 @@
 import { Spacing } from '@/constants/theme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
-import React, { useEffect } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const router = useRouter();
   const pulseAnim = useSharedValue(1);
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    AsyncStorage.getItem('welcome_shown').then((val) => {
+      if (!val) setShowWelcome(true);
+    });
+  }, []);
+
+  const handleCloseWelcome = async () => {
+    await AsyncStorage.setItem('welcome_shown', 'true');
+    setShowWelcome(false);
+  };
 
   useEffect(() => {
     pulseAnim.value = withRepeat(
@@ -59,9 +72,28 @@ export default function HomeScreen() {
 
         {/* Bouton pour accéder à l'écran de partage */}
         <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 20 }]} onPress={() => router.push('/(tabs)/share')}>
-          <Text style={styles.shareButtonText}>� Télécharger et partager</Text>
+          <Text style={styles.shareButtonText}>📲 Télécharger et partager</Text>
         </Pressable>
       </ScrollView>
+
+      {/* Modale de bienvenue — affichée une seule fois */}
+      <Modal visible={showWelcome} transparent animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalBox}>
+            <Text style={styles.modalTitle}>🎧 Bienvenue sur EquiMood</Text>
+            <Text style={styles.modalText}>
+              Pour vivre pleinement l'expérience, écoute les audios{' '}
+              <Text style={styles.modalAccent}>au calme, avec des écouteurs,</Text>
+              {' '}à l'abri des distractions.{'\n\n'}
+              C'est dans ce silence que la magie opère. 🐴
+            </Text>
+            <Pressable style={styles.modalButton} onPress={handleCloseWelcome}>
+              <Text style={styles.modalButtonText}>J'ai compris 🎧</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
     </SafeAreaView>
   );
 }
@@ -182,5 +214,50 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+  modalBox: {
+    backgroundColor: '#FFFCF7',
+    borderRadius: 20,
+    padding: 28,
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: '#A8782A',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    color: '#A8782A',
+    marginBottom: 14,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 15,
+    lineHeight: 23,
+    color: '#6B4D27',
+    textAlign: 'center',
+    fontFamily: 'PlayfairDisplay_700Bold',
+    marginBottom: 22,
+  },
+  modalAccent: {
+    fontStyle: 'italic',
+    color: '#A8782A',
+  },
+  modalButton: {
+    backgroundColor: '#A8782A',
+    paddingVertical: 11,
+    paddingHorizontal: 30,
+    borderRadius: 24,
+  },
+  modalButtonText: {
+    color: '#FFFCF7',
+    fontSize: 15,
+    fontWeight: '700',
   },
 });
