@@ -1,11 +1,14 @@
 import React from 'react';
 import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const qrImage = require('@/assets/images/qr-equimood.png');
 
 export default function ShareScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFBF7' }} edges={['top']}>
+      <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+
       <Text style={styles.title}>Partager Equimood</Text>
       <Text style={styles.subtitle}>
         Scannez ce QR code pour accéder à Equimood sur votre téléphone ou partagez-le autour de vous !
@@ -15,27 +18,26 @@ export default function ShareScreen() {
         https://equimood.netlify.app
       </Text>
 
-      <View style={styles.socialBox}>
-        <Text style={styles.socialTitle}>Nous suivre</Text>
-        <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
-          <Text style={styles.socialIcon}>📸</Text>
-          <Text style={styles.socialText}>@equimood_officiel</Text>
-          <Text style={styles.socialNetwork}>Instagram</Text>
-        </Pressable>
-        <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.tiktok.com/@equimood_officiel')}>
-          <Text style={styles.socialIcon}>🎵</Text>
-          <Text style={styles.socialText}>@equimood_officiel</Text>
-          <Text style={styles.socialNetwork}>TikTok</Text>
-        </Pressable>
-      </View>
-
       <View style={styles.instructionsBox}>
         <Text style={styles.instructionsTitle}>📲 Installer l'application</Text>
         <Text style={styles.instructionsText}>1. Ouvrez le lien dans <Text style={styles.bold}>Safari</Text></Text>
         <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>⎋ Partager</Text></Text>
         <Text style={styles.instructionsText}>3. Choisissez <Text style={styles.bold}>"Sur l'écran d'accueil"</Text></Text>
       </View>
+
+      <View style={styles.socialBox}>
+        <Text style={styles.socialTitle}>Nous suivre</Text>
+        <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
+          <Text style={styles.socialText}>@equimood_officiel</Text>
+          <Text style={styles.socialNetwork}>Instagram</Text>
+        </Pressable>
+        <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.tiktok.com/@equimood_officiel')}>
+          <Text style={styles.socialText}>@equimood_officiel</Text>
+          <Text style={styles.socialNetwork}>TikTok</Text>
+        </Pressable>
+      </View>
     </ScrollView>
+    </SafeAreaView>
   );
 }
 
