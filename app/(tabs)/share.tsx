@@ -1,11 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const qrImage = require('@/assets/images/qr-equimood.png');
 
 export default function ShareScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Partager Equimood</Text>
       <Text style={styles.subtitle}>
         Scannez ce QR code pour accéder à Equimood sur votre téléphone ou partagez-le autour de vous !
@@ -20,17 +20,18 @@ export default function ShareScreen() {
         <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>⎋ Partager</Text></Text>
         <Text style={styles.instructionsText}>3. Choisissez <Text style={styles.bold}>"Sur l'écran d'accueil"</Text></Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#FEFBF7',
     padding: 24,
+    paddingTop: 40,
+    paddingBottom: 40,
   },
   title: {
     fontSize: 28,
