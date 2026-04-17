@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linking, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 const qrImage = require('@/assets/images/qr-equimood.png');
 
