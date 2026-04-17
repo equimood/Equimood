@@ -36,6 +36,19 @@ export default function ShareScreen() {
           <Text style={styles.socialNetwork}>TikTok</Text>
         </Pressable>
       </View>
+
+      <View style={styles.feedbackBox}>
+        <Text style={styles.feedbackTitle}>✨ EquiMood vient de naître !</Text>
+        <Text style={styles.feedbackText}>
+          Vos retours comptent énormément. Dites-nous ce que vous aimez, ce que vous voudriez voir évoluer...
+        </Text>
+        <Pressable style={styles.feedbackButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
+          <Text style={styles.feedbackButtonText}>💬 Message sur Instagram</Text>
+        </Pressable>
+        <Pressable style={[styles.feedbackButton, styles.feedbackButtonAlt]} onPress={() => Linking.openURL('mailto:equimood.app@gmail.com?subject=Mon retour sur EquiMood')}>
+          <Text style={styles.feedbackButtonText}>✉️ Par email</Text>
+        </Pressable>
+      </View>
     </ScrollView>
     </SafeAreaView>
   );
@@ -133,5 +146,45 @@ const styles = StyleSheet.create({
   socialNetwork: {
     fontSize: 13,
     color: '#A68B5B',
+  },
+  feedbackBox: {
+    width: '100%',
+    backgroundColor: '#FFF8EE',
+    borderRadius: 16,
+    padding: 20,
+    marginTop: 8,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#E8D5B0',
+  },
+  feedbackTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#8B6D47',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  feedbackText: {
+    fontSize: 14,
+    color: '#5C5044',
+    textAlign: 'center',
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  feedbackButton: {
+    backgroundColor: '#8B6D47',
+    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  feedbackButtonAlt: {
+    backgroundColor: '#C6A45D',
+  },
+  feedbackButtonText: {
+    color: '#FEFBF7',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
