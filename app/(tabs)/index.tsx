@@ -42,7 +42,8 @@ export default function HomeScreen() {
         {/* Second paragraphe */}
         <View style={styles.textBlock}>
           <Text style={styles.introText}>
-            Avec EquiMood, transforme tes émotions en confiance et fais de ton mental ton plus grand allié.
+            Avec EquiMood, transforme tes émotions en confiance et{' '}
+            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.</Text>
           </Text>
         </View>
 
@@ -122,6 +123,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     fontFamily: 'PlayfairDisplay_700Bold',
     letterSpacing: 0.5,
+  },
+  introTextAccent: {
+    color: '#C9A86A',
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontStyle: 'italic',
   },
   logoContainer: {
     alignItems: 'center',
