@@ -20,9 +20,18 @@ export default function ShareScreen() {
 
       <View style={styles.instructionsBox}>
         <Text style={styles.instructionsTitle}>📲 Installer l'application</Text>
+
+        <Text style={styles.instructionsSubtitle}>🍎 Avec Safari</Text>
         <Text style={styles.instructionsText}>1. Ouvrez le lien dans <Text style={styles.bold}>Safari</Text></Text>
-        <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>⎋ Partager</Text></Text>
+        <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>↑ Partager</Text> (la flèche vers le haut)</Text>
         <Text style={styles.instructionsText}>3. Choisissez <Text style={styles.bold}>"Sur l'écran d'accueil"</Text></Text>
+
+        <View style={styles.instructionsDivider} />
+
+        <Text style={styles.instructionsSubtitle}>🌐 Avec Chrome <Text style={styles.instructionsSubtitleLight}>(le navigateur Google)</Text></Text>
+        <Text style={styles.instructionsText}>1. Ouvrez le lien dans <Text style={styles.bold}>Chrome</Text></Text>
+        <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>⋮</Text> (3 points en haut à droite)</Text>
+        <Text style={styles.instructionsText}>3. Choisissez <Text style={styles.bold}>"Ajouter à l'écran d'accueil"</Text></Text>
       </View>
 
       <View style={styles.socialBox}>
@@ -108,13 +117,33 @@ const styles = StyleSheet.create({
     color: '#5C5044',
     marginBottom: 6,
   },
+  instructionsSubtitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#A8782A',
+    marginBottom: 8,
+    marginTop: 4,
+  },
+  instructionsSubtitleLight: {
+    fontSize: 13,
+    fontWeight: 'normal',
+    color: '#8B6D47',
+  },
+  instructionsDivider: {
+    height: 1,
+    backgroundColor: '#E8D5B0',
+    width: '100%',
+    marginVertical: 14,
+  },
   bold: {
     fontWeight: 'bold',
     color: '#8B6D47',
   },
   socialBox: {
     width: '100%',
+    marginTop: 20,
     marginBottom: 16,
+    alignItems: 'center',
   },
   socialTitle: {
     fontSize: 16,
