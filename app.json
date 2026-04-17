@@ -32,7 +32,12 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/ce_que_tu_ressens.png"
+      "favicon": "./assets/images/ce_que_tu_ressens.png",
+      "name": "EquiMood",
+      "shortName": "EquiMood",
+      "description": "Transforme tes émotions en confiance. Fais de ton mental ton plus grand allié.",
+      "themeColor": "#C9A86A",
+      "backgroundColor": "#FFFCF7"
     },
     "plugins": [
       "expo-router",
