@@ -1,22 +1,9 @@
 import React from 'react';
-import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Linking, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 const qrImage = require('@/assets/images/qr-equimood.png');
 
 export default function ShareScreen() {
-  const handleDownload = () => {
-    if (Platform.OS === 'web') {
-      // Ouvre le QR dans un nouvel onglet → l'utilisatrice peut faire clic droit "Enregistrer"
-      const link = document.createElement('a');
-      link.href = '/assets/images/qr-equimood.png';
-      link.download = 'qr-equimood.png';
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Partager Equimood</Text>
@@ -27,11 +14,12 @@ export default function ShareScreen() {
       <Text selectable style={styles.url}>
         https://equimood.netlify.app
       </Text>
-      {Platform.OS === 'web' && (
-        <Pressable style={styles.downloadButton} onPress={handleDownload}>
-          <Text style={styles.downloadButtonText}>⬇️ Télécharger le QR</Text>
-        </Pressable>
-      )}
+      <View style={styles.instructionsBox}>
+        <Text style={styles.instructionsTitle}>📲 Installer l'application</Text>
+        <Text style={styles.instructionsText}>1. Ouvrez le lien dans <Text style={styles.bold}>Safari</Text></Text>
+        <Text style={styles.instructionsText}>2. Appuyez sur <Text style={styles.bold}>⎋ Partager</Text></Text>
+        <Text style={styles.instructionsText}>3. Choisissez <Text style={styles.bold}>"Sur l'écran d'accueil"</Text></Text>
+      </View>
     </View>
   );
 }
@@ -68,16 +56,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 24,
   },
-  downloadButton: {
-    backgroundColor: '#C6A45D',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 30,
-    marginTop: 16,
+  instructionsBox: {
+    backgroundColor: '#FFF8EE',
+    borderRadius: 16,
+    padding: 20,
+    marginTop: 8,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#E8D5B0',
   },
-  downloadButtonText: {
-    color: '#FEFBF7',
+  instructionsTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#8B6D47',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  instructionsText: {
+    fontSize: 15,
+    color: '#5C5044',
+    marginBottom: 6,
+  },
+  bold: {
+    fontWeight: 'bold',
+    color: '#8B6D47',
   },
 });

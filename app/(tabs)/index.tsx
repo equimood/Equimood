@@ -58,7 +58,7 @@ export default function HomeScreen() {
 
         {/* Bouton pour accéder à l'écran de partage */}
         <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 20 }]} onPress={() => router.push('/(tabs)/share')}>
-          <Text style={styles.shareButtonText}>📤 Partager</Text>
+          <Text style={styles.shareButtonText}>� Télécharger et partager</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
