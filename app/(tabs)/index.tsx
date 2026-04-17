@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     fontFamily: 'PlayfairDisplay_700Bold',
     fontStyle: 'italic',
-    color: '#C9A86A',
+    color: '#A8782A',
     marginTop: 22,
     marginBottom: 0,
     textAlign: 'center',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   introTextAccent: {
-    color: '#C9A86A',
+    color: '#A8782A',
     fontFamily: 'PlayfairDisplay_700Bold',
     fontStyle: 'italic',
   },
