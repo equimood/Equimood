@@ -146,7 +146,7 @@ export default function QuotidienScreen() {
       });
       setIsPlayerVisible(true);
     }
-    // Module 9 : "Se libérer d'une mauvaise expérience"
+    // Module 9 : "Passer à un autre cheval"
     else if (moduleId === 9) {
       setCurrentModule({
         title: moduleTitle,
