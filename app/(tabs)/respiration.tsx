@@ -56,8 +56,8 @@ export default function RespirationScreen() {
   useEffect(() => {
     breathAnimation.value = withRepeat(
       withSequence(
-        withTiming(1.3, { duration: 5000 }),
-        withTiming(1, { duration: 5000 })
+        withTiming(1.3, { duration: 3000 }),
+        withTiming(1, { duration: 3000 })
       ),
       -1,
       true
