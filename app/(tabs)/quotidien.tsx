@@ -36,7 +36,7 @@ const stressModules: Module[] = [
   { id: 5, title: 'Stress avant une séance', duration: '', available: false, type: 'audio' },
   { id: 7, title: 'Le regard des autres', duration: '', available: true, type: 'audio' },
   { id: 8, title: 'La peur de décevoir', duration: '', available: true, type: 'audio' },
-  { id: 9, title: 'Se libérer d\'une mauvaise expérience', duration: '', available: true, type: 'audio' },
+  { id: 9, title: 'Passer à un autre cheval', duration: '', available: true, type: 'audio' },
 ];
 
 // 3. CONCENTRATION
