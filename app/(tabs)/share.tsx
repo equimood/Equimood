@@ -37,12 +37,10 @@ export default function ShareScreen() {
       <View style={styles.socialBox}>
         <Text style={styles.socialTitle}>Nous suivre</Text>
         <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
-          <Text style={styles.socialText}>@equimood_officiel</Text>
-          <Text style={styles.socialNetwork}>Instagram</Text>
+          <Text style={styles.socialText}>@equimood_officiel <Text style={styles.socialNetwork}>Instagram</Text></Text>
         </Pressable>
         <Pressable style={styles.socialButton} onPress={() => Linking.openURL('https://www.tiktok.com/@equimood_officiel')}>
-          <Text style={styles.socialText}>@equimood_officiel</Text>
-          <Text style={styles.socialNetwork}>TikTok</Text>
+          <Text style={styles.socialText}>@equimood_officiel <Text style={styles.socialNetwork}>TikTok</Text></Text>
         </Pressable>
       </View>
 
