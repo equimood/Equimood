@@ -15,7 +15,7 @@ export default function ShareScreen() {
       </Text>
       <Image source={qrImage} style={styles.qr} resizeMode="contain" />
       <Text selectable style={styles.url}>
-        https://equimood.netlify.app
+        https://equimood.fr
       </Text>
 
       <View style={styles.instructionsBox}>

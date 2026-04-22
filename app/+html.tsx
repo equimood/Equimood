@@ -19,6 +19,13 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="EquiMood" />
 
+        {/* Plausible Analytics — statistiques de visites sans cookie */}
+        <script
+          defer
+          data-domain="equimood.netlify.app"
+          src="https://plausible.io/js/script.js"
+        />
+
         {/* 
           Disable body scrolling on web. This makes ScrollView components work closer to how they do on native. 
           However, body scrolling is often nice to have for mobile web. If you want to enable it, remove this line.

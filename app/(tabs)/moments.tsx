@@ -162,14 +162,8 @@ export default function CompetitionScreen() {
       });
       setIsPlayerVisible(true);
     }
-    // Module 16 : "Se libérer d'une mauvaise expérience"
-    else if (moduleId === 16) {
-      setCurrentModule({
-        title: moduleTitle,
-        audioFile: require('@/assets/audio/se_liberer_dune_mauvaise_experience_def.mp3'),
-      });
-      setIsPlayerVisible(true);
-    } else {
+    // ...existing code...
+    else {
       console.log('Module sélectionné:', moduleTitle);
     }
   };
