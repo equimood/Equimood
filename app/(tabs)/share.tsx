@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const qrImage = require('@/assets/images/qr-equimood.png');
+const qrImage = require('@/assets/images/qr-equimood-2.png');
 
 export default function ShareScreen() {
   return (
