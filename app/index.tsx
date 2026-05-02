@@ -28,16 +28,14 @@ export default function SplashScreenComponent() {
   }, [fontsLoaded]);
 
   useEffect(() => {
-    if (ready) {
-      fadeAnim.value = withTiming(1, { duration: 1500 }, (finished) => {
-        if (finished) {
-          setTimeout(() => {
-            router.replace('/(tabs)');
-          }, 2000);
-        }
-      });
-    }
-  }, [ready]);
+  if (ready) {
+    fadeAnim.value = withTiming(1, { duration: 1500 });
+    const timer = setTimeout(() => {
+      router.replace('/(tabs)');
+    }, 3500);
+    return () => clearTimeout(timer);
+  }
+}, [ready]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: fadeAnim.value,
