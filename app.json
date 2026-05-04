@@ -7,7 +7,6 @@
     "icon": "./assets/images/ce_que_tu_ressens.png",
     "scheme": "equimood",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
@@ -16,6 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.emiliecolli.EquiMood",
+      "jsEngine": "jsc",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -25,7 +25,6 @@
         "foregroundImage": "./assets/images/ce_que_tu_ressens.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.emiliecolli.EquiMood"
     },
