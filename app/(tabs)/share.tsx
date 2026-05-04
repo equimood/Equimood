@@ -1,5 +1,5 @@
-import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -47,12 +47,8 @@ export default function ShareScreen() {
 
       <View style={styles.feedbackBox}>
         <Text style={styles.feedbackTitle}>✨ EquiMood vient de naître !</Text>
-        <Text style={styles.feedbackText}>
-          Ton retour compte énormément. Dis-nous ce que tu as aimé, ce que tu aimerais voir évoluer...
-        </Text>
-        <Text style={styles.feedbackText}>
-          Et si l'expérience te parle, n'hésite pas à la partager autour de toi et à nous retrouver sur @equimood_officiel pour faire partie de cette belle aventure. ✨
-        </Text>
+        <Text style={styles.feedbackText}>Ton retour compte énormément. Dis-nous ce que tu as aimé, ce que tu aimerais voir évoluer...</Text>
+        <Text style={styles.feedbackText}>Et si l'expérience te parle, n'hésite pas à la partager autour de toi et à nous retrouver sur @equimood_officiel pour faire partie de cette belle aventure. ✨</Text>
         <Pressable style={styles.feedbackButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
           <Ionicons name="logo-instagram" size={18} color="#FEFBF7" style={{marginRight: 8}} />
           <Text style={styles.feedbackButtonText}>Instagram — @equimood_officiel</Text>
@@ -201,12 +197,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   feedbackText: {
-    fontSize: 16,
+    fontSize: 15,
     color: '#8B6D47',
-    fontWeight: '600',
-    textAlign: 'justify',
-    marginBottom: 16,
-    lineHeight: 27,
+    fontWeight: '500',
+    textAlign: 'left',
+    marginBottom: 12,
+    lineHeight: 22,
   },
   feedbackButton: {
     flexDirection: 'row',
