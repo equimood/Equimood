@@ -51,7 +51,7 @@ export default function SplashScreenComponent() {
         {/* Logo avec animation de fondu */}
         <Animated.View style={[styles.logoContainer, animatedStyle]}>
           <Image 
-            source={require('../assets/images/ce_que_tu_ressens.png')} 
+            source={require('../assets/images/ce_que_tu_ressens_2.png')} 
             style={styles.logo}
             resizeMode="contain"
           />

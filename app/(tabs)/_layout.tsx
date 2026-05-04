@@ -49,7 +49,7 @@ export default function TabsLayout() {
         headerTintColor: '#8B6D47',
         headerTitleStyle: {
           fontFamily: 'PlayfairDisplay_700Bold',
-          fontSize: 20,
+          fontSize: 22,
         },
       }}
     >
@@ -158,7 +158,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="share"
         options={{
-          href: null, // Masqué de la tab bar, accessible via bouton dans l'accueil
+          href: null,
+          headerShown: false,
         }}
       />
     </Tabs>

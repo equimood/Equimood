@@ -36,7 +36,7 @@ export default function SplashScreenComponent() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Image
-        source={require('../assets/images/ce_que_tu_ressens.png')}
+        source={require('../assets/images/ce_que_tu_ressens_2.png')}
         style={styles.logo}
         resizeMode="contain"
       />

@@ -65,6 +65,17 @@ export default function HomeScreen() {
           <Text style={styles.slogan}>« Ce que tu ressens, il le reflète. »</Text>
         </View>
 
+        {/* Bandeau lancement */}
+        <View style={styles.launchBanner}>
+          <Text style={styles.launchBannerEmoji}>🎁</Text>
+          <Text style={styles.launchBannerTitle}>Lancement EquiMood — Accès libre offert</Text>
+          <Text style={styles.launchBannerText}>
+            Pour fêter notre naissance, tous les modules sont accessibles gratuitement jusqu'au{' '}
+            <Text style={styles.launchBannerDate}>1er juin 2026</Text>.{'\n'}
+            Profites-en maintenant, avant le passage en version Premium. 💛
+          </Text>
+        </View>
+
         {/* Bouton Mon profil avec encore plus d'espace */}
         <Pressable style={[styles.profileButton, { marginTop: 32 }]} onPress={() => router.push('/profile')}>
           <Text style={styles.profileButtonText}>Mon profil</Text>
@@ -72,7 +83,7 @@ export default function HomeScreen() {
 
         {/* Bouton pour accéder à l'écran de partage */}
         <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 20 }]} onPress={() => router.push('/(tabs)/share')}>
-          <Text style={styles.shareButtonText}>Découvrir Equimood</Text>
+          <Text style={styles.shareButtonText}>Découvrir et installer EquiMood</Text>
         </Pressable>
       </ScrollView>
 
@@ -148,8 +159,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   introText: {
-    fontSize: 15,
-    lineHeight: 22,
+    fontSize: 17,
+    lineHeight: 26,
     color: '#8B6D47',
     textAlign: 'center',
     paddingHorizontal: Spacing.lg,
@@ -259,5 +270,37 @@ const styles = StyleSheet.create({
     color: '#FFFCF7',
     fontSize: 15,
     fontWeight: '700',
+  },
+  launchBanner: {
+    width: '100%',
+    backgroundColor: '#FFF8EE',
+    borderRadius: 16,
+    borderWidth: 1.5,
+    borderColor: '#C6A45D',
+    padding: 20,
+    marginTop: 24,
+    marginBottom: 4,
+    alignItems: 'center',
+  },
+  launchBannerEmoji: {
+    fontSize: 28,
+    marginBottom: 8,
+  },
+  launchBannerTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#8B6D47',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  launchBannerText: {
+    fontSize: 15,
+    color: '#7A5C3A',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  launchBannerDate: {
+    fontWeight: 'bold',
+    color: '#8B6D47',
   },
 });
