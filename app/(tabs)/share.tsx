@@ -10,10 +10,9 @@ export default function ShareScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FEFBF7' }} edges={['top']}>
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
 
-      <Text style={styles.title}>Découvrir EquiMood</Text>
-
-      <Text style={{fontSize: 17, fontWeight: 'bold', color: '#B8933A', textAlign: 'center', marginBottom: 16, marginTop: 4}}>
-        EquiMood, ton coach mental à cheval.{"\n"}Partout avec toi.
+      <Text style={styles.title}>EquiMood</Text>
+      <Text style={{fontSize: 17, fontWeight: 'bold', color: '#B8933A', textAlign: 'center', marginBottom: 16, marginTop: 4, lineHeight: 28}}>
+        ton coach mental à cheval,{"\n"}partout avec toi.
       </Text>
 
       <View style={{backgroundColor: '#FFF8EE', borderRadius: 16, padding: 20, marginBottom: 24, borderWidth: 1, borderColor: '#E8D5B0', width: '100%'}}>

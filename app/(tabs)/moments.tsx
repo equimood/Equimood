@@ -84,6 +84,19 @@ export default function CompetitionScreen() {
   const [selectedPhase, setSelectedPhase] = React.useState<string | null>(null);
   const [selectedSubCategory, setSelectedSubCategory] = React.useState<string | null>(null);
   const [isPlayerVisible, setIsPlayerVisible] = React.useState(false);
+
+  const renderTitle = (title: string) => {
+    if (title.includes(' - Mantra')) {
+      const parts = title.split(' - Mantra');
+      return (
+        <Text style={styles.moduleTitle}>
+          {parts[0]}
+          <Text style={{ fontWeight: 'bold' }}> — Mantra</Text>
+        </Text>
+      );
+    }
+    return <Text style={styles.moduleTitle}>{title}</Text>;
+  };
   const [currentModule, setCurrentModule] = React.useState<{ title: string; audioFile: any } | null>(null);
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
 
@@ -240,7 +253,7 @@ export default function CompetitionScreen() {
                               onPress={() => handleModulePress(module.id, module.title)}
                             >
                               <View style={styles.moduleContent}>
-                                <Text style={styles.moduleTitle}>{module.title}</Text>
+                                {renderTitle(module.title)}
                                 <View style={styles.badgesRow}>
                                   <View style={styles.typeBadge}>
                                     <Ionicons 
@@ -280,7 +293,7 @@ export default function CompetitionScreen() {
                           onPress={() => handleModulePress(module.id, module.title)}
                         >
                           <View style={styles.moduleContent}>
-                            <Text style={styles.moduleTitle}>{module.title}</Text>
+                            {renderTitle(module.title)}
                             <View style={styles.badgesRow}>
                               <View style={styles.typeBadge}>
                                 <Ionicons 
