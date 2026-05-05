@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     borderColor: '#A8782A',
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'PlayfairDisplay_700Bold',
     color: '#A8782A',
     marginBottom: 14,
