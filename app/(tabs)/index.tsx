@@ -76,8 +76,17 @@ export default function HomeScreen() {
           </Text>
         </View>
 
+        {/* Icône EquiMood+ */}
+        <Pressable style={styles.plusIconButton} onPress={() => router.push('/equimood-plus' as any)}>
+          <Image
+            source={require('@/assets/images/equimood_plus.png')}
+            style={styles.plusIcon}
+            resizeMode="contain"
+          />
+        </Pressable>
+
         {/* Bouton Mon profil avec encore plus d'espace */}
-        <Pressable style={[styles.profileButton, { marginTop: 32 }]} onPress={() => router.push('/profile')}>
+        <Pressable style={[styles.profileButton, { marginTop: 16 }]} onPress={() => router.push('/profile')}>
           <Text style={styles.profileButtonText}>Mon profil</Text>
         </Pressable>
 
@@ -298,6 +307,16 @@ const styles = StyleSheet.create({
     color: '#7A5C3A',
     textAlign: 'center',
     lineHeight: 24,
+  },
+  plusIconButton: {
+    alignSelf: 'flex-start',
+    marginTop: 16,
+    marginBottom: 4,
+    padding: 4,
+  },
+  plusIcon: {
+    width: 48,
+    height: 48,
   },
   launchBannerDate: {
     fontWeight: 'bold',
