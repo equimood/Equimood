@@ -37,7 +37,7 @@ export default function ShareScreen() {
           Ils t'aident à t'apaiser, t'ancrer et à installer de nouveaux réflexes.{"\n\n"}
           En concours, utilise si tu préfères les formats courts appelés "mantras."{"\n"}
           Quelques mots suffisent à te reconnecter instantanément à ce que tu as déjà intégré, que ce soit en camion, au box ou en attendant ton tour.{"\n\n"}
-          Pour renforcer cet ancrage, une petite pierre EquiMood sera bientôt disponible... Un simple regard ou un geste, et tu te reconnecteras à ce que tu as installé.
+          Pour renforcer cet ancrage, une petite pierre EquiMood à accrocher à ta selle sera bientôt disponible... Un simple regard ou un geste, et tu te reconnecteras à ce que tu as installé.
         </Text>
         <Text style={{fontSize: 15, color: '#C6A45D', fontWeight: 'bold', marginTop: 14, lineHeight: 26, textAlign: 'center'}}>
           💛 Ton calme revient.{"\n"}💛 Ta confiance aussi.
@@ -46,8 +46,8 @@ export default function ShareScreen() {
 
       <View style={styles.feedbackBox}>
         <Text style={styles.feedbackTitle}>✨ EquiMood vient de naître !</Text>
-        <Text style={styles.feedbackText}>Ton retour compte énormément. Dis-nous ce que tu as aimé, ce que tu aimerais voir évoluer...</Text>
-        <Text style={styles.feedbackText}>Et si l'expérience te parle, n'hésite pas à la partager autour de toi et à nous retrouver sur @equimood_officiel pour faire partie de cette belle aventure. ✨</Text>
+        <Text style={styles.feedbackText}>Ton retour compte énormément. Dis-nous ce que tu as aimé, ce que tu aimerais voir évoluer… N'hésite pas à nous suggérer des audios et des problématiques que tu voudrais que j'aborde, car EquiMood s'enrichira chaque mois selon vos demandes.</Text>
+        <Text style={styles.feedbackText}>Et bien sûr, si l'expérience te parle, partage-la autour de toi et n'hésite pas à poster des avis positifs ! Merci pour ça. ✨</Text>
         <Pressable style={styles.feedbackButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>
           <Ionicons name="logo-instagram" size={18} color="#FEFBF7" style={{marginRight: 8}} />
           <Text style={styles.feedbackButtonText}>Instagram — @equimood_officiel</Text>
@@ -192,16 +192,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#8B6D47',
-    marginBottom: 8,
+    marginBottom: 12,
     textAlign: 'center',
   },
   feedbackText: {
-    fontSize: 15,
+    fontSize: 16,
     color: '#8B6D47',
-    fontWeight: '500',
+    fontWeight: '600',
     textAlign: 'left',
-    marginBottom: 12,
-    lineHeight: 22,
+    marginBottom: 14,
+    lineHeight: 24,
   },
   feedbackButton: {
     flexDirection: 'row',

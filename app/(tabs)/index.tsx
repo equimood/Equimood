@@ -41,6 +41,14 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container} edges={[]}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
 
+        {/* Accroche émotionnelle */}
+        <View style={styles.hookBlock}>
+          <Text style={styles.hookText}>
+            J'ai peur de décevoir, le regard des autres me paralyse,{'\n'}
+            je ne me sens pas légitime, je perds mes moyens…
+          </Text>
+        </View>
+
         {/* Logo animé centré (œil de la jument) */}
         <View style={styles.logoContainer}>
           <Animated.View style={[styles.imageWrapper, animatedStyle]}>
@@ -76,17 +84,8 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        {/* Icône EquiMood+ */}
-        <Pressable style={styles.plusIconButton} onPress={() => router.push('/equimood-plus' as any)}>
-          <Image
-            source={require('@/assets/images/equimood_plus.png')}
-            style={styles.plusIcon}
-            resizeMode="contain"
-          />
-        </Pressable>
-
         {/* Bouton Mon profil avec encore plus d'espace */}
-        <Pressable style={[styles.profileButton, { marginTop: 16 }]} onPress={() => router.push('/profile')}>
+        <Pressable style={[styles.profileButton, { marginTop: 32 }]} onPress={() => router.push('/profile')}>
           <Text style={styles.profileButtonText}>Mon profil</Text>
         </Pressable>
 
@@ -321,5 +320,19 @@ const styles = StyleSheet.create({
   launchBannerDate: {
     fontWeight: 'bold',
     color: '#8B6D47',
+  },
+  hookBlock: {
+    alignItems: 'center',
+    marginBottom: 22,
+    marginTop: 0,
+    paddingHorizontal: 16,
+  },
+  hookText: {
+    fontSize: 17,
+    color: '#A8782A',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    lineHeight: 30,
+    fontFamily: 'PlayfairDisplay_700Bold',
   },
 });
