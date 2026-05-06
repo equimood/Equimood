@@ -44,8 +44,7 @@ export default function HomeScreen() {
         {/* Accroche émotionnelle */}
         <View style={styles.hookBlock}>
           <Text style={styles.hookText}>
-            J'ai peur de décevoir, le regard des autres me paralyse,{'\n'}
-            je ne me sens pas légitime, je perds mes moyens…
+            J'ai peur de décevoir, le regard des autres me paralyse, je ne me sens pas légitime, je perds mes moyens…
           </Text>
         </View>
 

@@ -17,8 +17,7 @@ export default function EquiMoodAboutScreen() {
 
         {/* Titre */}
         <View style={styles.titleBlock}>
-          <Text style={styles.title}>Qui est </Text>
-          <Text style={styles.titleAccent}>Madame EquiMood ?</Text>
+          <Text style={styles.titleFull}>Qui est Madame <Text style={styles.titleAccent}>EquiMood ?</Text></Text>
         </View>
 
         <View style={styles.divider} />
@@ -84,12 +83,18 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   title: {
-    fontSize: 28,
+    fontSize: 22,
     fontFamily: 'PlayfairDisplay_700Bold',
     color: '#8B6D47',
   },
+  titleFull: {
+    fontSize: 22,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    color: '#8B6D47',
+    textAlign: 'center',
+  },
   titleAccent: {
-    fontSize: 28,
+    fontSize: 22,
     fontFamily: 'PlayfairDisplay_700Bold',
     color: '#C6A45D',
     letterSpacing: 0.5,

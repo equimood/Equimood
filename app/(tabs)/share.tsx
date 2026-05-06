@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   feedbackText: {
-    fontSize: 16,
+    fontSize: 15,
     color: '#8B6D47',
     fontWeight: '600',
     textAlign: 'left',
