@@ -1,8 +1,8 @@
 import { Colors } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 
 // Composant pour ajouter l'effet glow
 const TabIconWithGlow = ({ children, focused }: { children: React.ReactNode; focused: boolean }) => (
@@ -24,6 +24,7 @@ const TabIconWithGlow = ({ children, focused }: { children: React.ReactNode; foc
 );
 
 export default function TabsLayout() {
+  const router = useRouter();
   return (
     <Tabs
       screenOptions={{
@@ -59,6 +60,23 @@ export default function TabsLayout() {
           title: 'Bienvenue',
           headerTitle: 'Bienvenue sur EquiMood !',
           headerTitleAlign: 'center',
+          headerRight: () => (
+            <Pressable
+              onPress={() => router.push('/equimood-plus' as any)}
+              style={{
+                marginRight: 12,
+                backgroundColor: '#FFFCF2',
+                borderRadius: 10,
+                padding: 4,
+              }}
+            >
+              <Image
+                source={require('@/assets/images/equimood_plus2.png')}
+                style={{ width: 32, height: 32, borderRadius: 6 }}
+                resizeMode="contain"
+              />
+            </Pressable>
+          ),
           tabBarIcon: ({ color, focused }) => (
             <TabIconWithGlow focused={focused}>
               <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />
