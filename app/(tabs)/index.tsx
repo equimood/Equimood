@@ -98,7 +98,7 @@ export default function HomeScreen() {
           <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
           <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi</Text>
           <Image
-            source={require('@/assets/images/equimood_plus2.png')}
+            source={require('@/assets/images/equimood_plus3.png')}
             style={styles.plusLogoImage}
             resizeMode="contain"
           />
