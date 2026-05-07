@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'PlayfairDisplay_700Bold',
     fontStyle: 'italic',
-    color: '#A8782A',
+    color: '#7A5010',
     textAlign: 'center',
     marginBottom: 10,
   },
