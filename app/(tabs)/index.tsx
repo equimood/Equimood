@@ -337,9 +337,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   plusLogoImage: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
+    width: 90,
+    height: 90,
+    borderRadius: 18,
   },
   plusLogoText: {
     fontSize: 15,
