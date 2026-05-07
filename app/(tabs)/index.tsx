@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: 'transparent',
     borderWidth: 1.5,
-    borderColor: '#6B4D27',
+    borderColor: '#C6A45D',
     paddingVertical: 8,
     paddingHorizontal: 24,
     borderRadius: 20,
@@ -220,9 +220,10 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   profileButtonText: {
-    color: '#6B4D27',
+    color: '#A8782A',
     fontSize: 13,
-    fontWeight: '600',
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontStyle: 'italic',
     textAlign: 'center',
   },
   shareButton: {
@@ -336,7 +337,7 @@ const styles = StyleSheet.create({
   },
   plusLogoButton: {
     alignSelf: 'center',
-    marginTop: 40,
+    marginTop: 60,
     marginBottom: 10,
     backgroundColor: '#C6A45D',
     paddingVertical: 9,
