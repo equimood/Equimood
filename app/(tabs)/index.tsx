@@ -97,11 +97,6 @@ export default function HomeScreen() {
         <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
           <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
           <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi</Text>
-          <Image
-            source={require('@/assets/images/equimood_plus3.png')}
-            style={styles.plusLogoImage}
-            resizeMode="contain"
-          />
         </Pressable>
       </ScrollView>
 
@@ -341,10 +336,10 @@ const styles = StyleSheet.create({
   },
   plusLogoButton: {
     alignSelf: 'center',
-    marginTop: 28,
+    marginTop: 40,
     marginBottom: 10,
     backgroundColor: '#C6A45D',
-    paddingVertical: 12,
+    paddingVertical: 9,
     paddingHorizontal: 28,
     borderRadius: 24,
     alignItems: 'center',
