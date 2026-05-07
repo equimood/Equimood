@@ -93,13 +93,10 @@ export default function HomeScreen() {
           <Text style={styles.shareButtonText}>Découvrir et installer EquiMood</Text>
         </Pressable>
 
-        {/* Logo EquiMood+ déplacé ici */}
+        {/* Bouton EquiMood PLUS */}
         <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
-          <Image
-            source={require('@/assets/images/equimood_plus2.png')}
-            style={styles.plusLogoImage}
-            resizeMode="contain"
-          />
+          <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
+          <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi →</Text>
         </Pressable>
       </ScrollView>
 
@@ -333,12 +330,35 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 8,
     marginBottom: 20,
-    padding: 4,
+    backgroundColor: '#FFF8EE',
+    borderWidth: 1.5,
+    borderColor: '#C6A45D',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 28,
+    alignItems: 'center',
   },
   plusLogoImage: {
     width: 52,
     height: 52,
     borderRadius: 10,
+  },
+  plusLogoText: {
+    fontSize: 15,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    color: '#8B6D47',
+    letterSpacing: 0.5,
+  },
+  plusLogoPlus: {
+    color: '#C6A45D',
+    letterSpacing: 2,
+  },
+  plusLogoSub: {
+    fontSize: 12,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontStyle: 'italic',
+    color: '#A8782A',
+    marginTop: 3,
   },
   hookBlock: {
     alignItems: 'center',
