@@ -96,8 +96,8 @@ export default function HomeScreen() {
         {/* Bouton EquiMood PLUS */}
         <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
           <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
-          <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi</Text>
         </Pressable>
+        <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi</Text>
       </ScrollView>
 
       {/* Modale de bienvenue — affichée une seule fois */}
@@ -338,10 +338,10 @@ const styles = StyleSheet.create({
   plusLogoButton: {
     alignSelf: 'center',
     marginTop: 60,
-    marginBottom: 10,
-    backgroundColor: '#C6A45D',
-    paddingVertical: 9,
-    paddingHorizontal: 28,
+    marginBottom: 6,
+    backgroundColor: '#B8922A',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
     borderRadius: 24,
     alignItems: 'center',
   },
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   plusLogoText: {
-    fontSize: 15,
+    fontSize: 17,
     fontFamily: 'PlayfairDisplay_700Bold',
     color: '#FFFCF7',
     letterSpacing: 0.5,
@@ -363,12 +363,12 @@ const styles = StyleSheet.create({
     letterSpacing: 3,
   },
   plusLogoSub: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'PlayfairDisplay_700Bold',
     fontStyle: 'italic',
-    color: '#FFFCF7',
-    marginTop: 4,
-    opacity: 0.9,
+    color: '#A8782A',
+    textAlign: 'center',
+    marginBottom: 10,
   },
   hookBlock: {
     alignItems: 'center',
