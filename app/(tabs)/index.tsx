@@ -210,9 +210,9 @@ const styles = StyleSheet.create({
   },
   profileButton: {
     alignSelf: 'center',
-    backgroundColor: 'transparent',
-    borderWidth: 1.5,
-    borderColor: '#C6A45D',
+    backgroundColor: '#FDF5E6',
+    borderWidth: 2,
+    borderColor: '#B8922A',
     paddingVertical: 8,
     paddingHorizontal: 24,
     borderRadius: 20,
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   profileButtonText: {
-    color: '#A8782A',
+    color: '#7A5010',
     fontSize: 13,
     fontFamily: 'PlayfairDisplay_700Bold',
     fontStyle: 'italic',
