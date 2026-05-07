@@ -60,23 +60,7 @@ export default function TabsLayout() {
           title: 'Bienvenue',
           headerTitle: 'Bienvenue sur EquiMood !',
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <Pressable
-              onPress={() => router.push('/equimood-plus' as any)}
-              style={{
-                marginRight: 12,
-                backgroundColor: '#FFFCF2',
-                borderRadius: 10,
-                padding: 4,
-              }}
-            >
-              <Image
-                source={require('@/assets/images/equimood_plus2.png')}
-                style={{ width: 32, height: 32, borderRadius: 6 }}
-                resizeMode="contain"
-              />
-            </Pressable>
-          ),
+  
           tabBarIcon: ({ color, focused }) => (
             <TabIconWithGlow focused={focused}>
               <Ionicons name={focused ? 'home' : 'home-outline'} size={24} color={color} />

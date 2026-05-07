@@ -89,8 +89,17 @@ export default function HomeScreen() {
         </Pressable>
 
         {/* Bouton pour accéder à l'écran de partage */}
-        <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 20 }]} onPress={() => router.push('/(tabs)/share')}>
+        <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 16 }]} onPress={() => router.push('/(tabs)/share')}>
           <Text style={styles.shareButtonText}>Découvrir et installer EquiMood</Text>
+        </Pressable>
+
+        {/* Logo EquiMood+ déplacé ici */}
+        <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
+          <Image
+            source={require('@/assets/images/equimood_plus2.png')}
+            style={styles.plusLogoImage}
+            resizeMode="contain"
+          />
         </Pressable>
       </ScrollView>
 
@@ -166,8 +175,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   introText: {
-    fontSize: 17,
-    lineHeight: 26,
+    fontSize: 15,
+    lineHeight: 24,
     color: '#8B6D47',
     textAlign: 'center',
     paddingHorizontal: Spacing.lg,
@@ -320,6 +329,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#8B6D47',
   },
+  plusLogoButton: {
+    alignSelf: 'center',
+    marginTop: 8,
+    marginBottom: 20,
+    padding: 4,
+  },
+  plusLogoImage: {
+    width: 52,
+    height: 52,
+    borderRadius: 10,
+  },
   hookBlock: {
     alignItems: 'center',
     marginBottom: 22,
@@ -327,11 +347,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   hookText: {
-    fontSize: 17,
+    fontSize: 14,
     color: '#A8782A',
     fontStyle: 'italic',
     textAlign: 'center',
-    lineHeight: 30,
+    lineHeight: 24,
     fontFamily: 'PlayfairDisplay_700Bold',
   },
 });
