@@ -63,13 +63,10 @@ export default function HomeScreen() {
         <View style={styles.textBlock}>
           <Text style={styles.introText}>
             Avec EquiMood, transforme tes émotions en confiance et{' '}
-            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.</Text>
+            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.{'\n'}</Text>
+            <Text style={styles.introTextAccent}>{'Car… '}</Text>
+            <Text style={styles.sloganInline}>« Ce que tu ressens, il le reflète. »</Text>
           </Text>
-        </View>
-
-        {/* Slogan déplacé en bas */}
-        <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 0 }}>
-          <Text style={styles.slogan}>« Ce que tu ressens, il le reflète. »</Text>
         </View>
 
         {/* Bandeau lancement */}
@@ -146,6 +143,12 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: 95,
     height: 95,
+  },
+  sloganInline: {
+    fontSize: 15,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontStyle: 'italic',
+    color: '#A8782A',
   },
   slogan: {
     fontSize: 19,
