@@ -1,5 +1,5 @@
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
-import { PlayfairDisplay_400Regular, PlayfairDisplay_700Bold, useFonts } from '@expo-google-fonts/playfair-display';
+import { PlayfairDisplay_400Regular, PlayfairDisplay_700Bold, PlayfairDisplay_700Bold_Italic, useFonts } from '@expo-google-fonts/playfair-display';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -15,6 +15,7 @@ export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     PlayfairDisplay_400Regular,
     PlayfairDisplay_700Bold,
+    PlayfairDisplay_700Bold_Italic,
     Lato_400Regular,
     Lato_700Bold,
   });

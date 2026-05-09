@@ -31,7 +31,7 @@ export default function ShareScreen() {
       </View>
 
       <View style={{backgroundColor: '#FFF8EE', borderRadius: 16, padding: 20, marginBottom: 24, borderWidth: 1, borderColor: '#E8D5B0', width: '100%'}}>
-        <Text style={{fontSize: 16, fontWeight: 'bold', color: '#8B6D47', textAlign: 'center', marginBottom: 12}}>🎧 Comment utiliser EquiMood</Text>
+  <Text style={{fontSize: 18, fontWeight: 'bold', color: '#8B6D47', textAlign: 'center', marginBottom: 12}}>🎧 Comment utiliser EquiMood</Text>
         <Text style={{fontSize: 16, color: '#8B6D47', fontWeight: '600', lineHeight: 24, textAlign: 'left'}}>
           Écoute les audios longs chez toi, avec tes écouteurs, au calme si possible, autant de fois que tu en ressens le besoin.{"\n"}
           Ils t'aident à t'apaiser, t'ancrer et à installer de nouveaux réflexes.{"\n\n"}
@@ -45,7 +45,7 @@ export default function ShareScreen() {
       </View>
 
       <View style={styles.feedbackBox}>
-        <Text style={styles.feedbackTitle}>✨ EquiMood vient de naître !</Text>
+  <Text style={{fontSize: 18, fontWeight: 'bold', color: '#8B6D47', textAlign: 'center', marginBottom: 8}}>✨ EquiMood vient de naître !</Text>
         <Text style={styles.feedbackText}>Ton retour compte énormément. Dis-nous ce que tu as aimé, ce que tu aimerais voir évoluer… N'hésite pas à nous suggérer des audios et des problématiques que tu voudrais que j'aborde, car EquiMood s'enrichira chaque mois selon vos demandes.</Text>
         <Text style={styles.feedbackText}>Et bien sûr, si l'expérience te parle, partage-la autour de toi et n'hésite pas à poster des avis positifs ! Merci pour ça. ✨</Text>
         <Pressable style={styles.feedbackButton} onPress={() => Linking.openURL('https://www.instagram.com/equimood_officiel')}>

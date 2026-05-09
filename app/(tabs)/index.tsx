@@ -44,7 +44,8 @@ export default function HomeScreen() {
         {/* Accroche émotionnelle */}
         <View style={styles.hookBlock}>
           <Text style={styles.hookText}>
-            J'ai peur de décevoir, le regard des autres me paralyse, je ne me sens pas légitime, je perds mes moyens…
+            J'ai peur de décevoir, le regard des autres me paralyse, je ne me sens pas légitime,{' '}
+            <Text style={styles.hookTextAccent}>je perds mes moyens…</Text>
           </Text>
         </View>
 
@@ -63,9 +64,9 @@ export default function HomeScreen() {
         <View style={styles.textBlock}>
           <Text style={styles.introText}>
             Avec EquiMood, transforme tes émotions en confiance et{' '}
-            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.{'\n'}</Text>
-            <Text style={styles.introTextAccent}>{'Car… '}</Text>
-            <Text style={styles.sloganInline}>« Ce que tu ressens, il le reflète. »</Text>
+            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié. </Text>
+            <Text style={styles.introTextAccent}>Car…</Text>
+            <Text style={styles.sloganInline}>{'\n'}« Ce que tu ressens, il le reflète. »</Text>
           </Text>
         </View>
 
@@ -380,11 +381,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   hookText: {
-    fontSize: 14,
-    color: '#A8782A',
-    fontStyle: 'italic',
-    textAlign: 'center',
-    lineHeight: 24,
-    fontFamily: 'PlayfairDisplay_700Bold',
-  },
+      fontSize: 15,
+      color: '#8B6D47',
+      textAlign: 'center',
+      lineHeight: 24,
+      fontFamily: 'PlayfairDisplay_700Bold',
+      letterSpacing: 0.3,
+    },
+    hookTextAccent: {
+      color: '#A8782A',
+      fontFamily: 'PlayfairDisplay_700Bold',
+      fontStyle: 'italic',
+    },
 });

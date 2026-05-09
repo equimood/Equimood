@@ -1,8 +1,8 @@
-import AudioPlayer from '@/components/AudioPlayer';
-import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
+import AudioPlayer from '@/components/AudioPlayer';
+import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -34,9 +34,7 @@ type MainPhase = {
 // ========== AVANT - Modules directs ==========
 const avantModules: Module[] = [
   { id: 1, title: 'Changer son regard', duration: '', available: true, type: 'audio' },
-  { id: 2, title: 'Reprendre confiance - Mantra', duration: '', available: true, type: 'audio' },
   { id: 4, title: 'Concentration avant le concours', duration: '', available: true, type: 'audio' },
-  { id: 3, title: 'La peur de décevoir - Mantra', duration: '', available: true, type: 'audio' },
 ];
 
 // ========== PENDANT ==========
@@ -44,6 +42,8 @@ const pendantModules: Module[] = [
   { id: 8, title: 'Après un refus — rebond immédiat', duration: '', available: false, type: 'audio' },
   { id: 9, title: 'Se remettre dedans après une erreur', duration: '', available: false, type: 'audio' },
   { id: 11, title: 'Recentrage express entre deux passages', duration: '', available: false, type: 'audio' },
+  { id: 2, title: 'Reprendre confiance - Mantra', duration: '', available: true, type: 'audio' },
+  { id: 3, title: 'La peur de décevoir - Mantra', duration: '', available: true, type: 'audio' },
 ];
 
 // ========== APRÈS ==========
@@ -64,7 +64,7 @@ const phases: MainPhase[] = [
   },
   {
     id: 'pendant',
-    title: 'Pendant',
+    title: 'Pendant / Mantras',
     emoji: '⚡',
     color: '#8B6D47',
     description: 'Modules ultra courts en pleine action',
@@ -81,6 +81,25 @@ const phases: MainPhase[] = [
 ];
 
 export default function CompetitionScreen() {
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const stored = await AsyncStorage.getItem('favorites');
+      if (stored) setFavoriteIds(JSON.parse(stored));
+    })();
+  }, []);
+
+  const toggleFavorite = async (moduleId: string) => {
+    let updated;
+    if (favoriteIds.includes(moduleId)) {
+      updated = favoriteIds.filter((id) => id !== moduleId);
+    } else {
+      updated = [...favoriteIds, moduleId];
+    }
+    setFavoriteIds(updated);
+    await AsyncStorage.setItem('favorites', JSON.stringify(updated));
+  };
   const [selectedPhase, setSelectedPhase] = React.useState<string | null>(null);
   const [selectedSubCategory, setSelectedSubCategory] = React.useState<string | null>(null);
   const [isPlayerVisible, setIsPlayerVisible] = React.useState(false);
@@ -273,6 +292,16 @@ export default function CompetitionScreen() {
                                 </View>
                               </View>
                               <Ionicons name="play-circle" size={32} color={phase.color} />
+                          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                            <Ionicons
+                              name={favoriteIds.includes(String(module.id)) ? 'heart' : 'heart-outline'}
+                              size={28}
+                              color={favoriteIds.includes(String(module.id)) ? '#C9A86A' : '#B0B0B0'}
+                              style={{ marginRight: 4 }}
+                              onPress={() => toggleFavorite(String(module.id))}
+                            />
+                            <Ionicons name="play-circle" size={32} color={phase.color} />
+                          </View>
                             </Pressable>
                           ))}
                         </View>
