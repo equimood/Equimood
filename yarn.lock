@@ -1089,6 +1089,15 @@
     "@babel/core" "^7.25.2"
     "@babel/plugin-transform-modules-commonjs" "^7.24.8"
 
+"@expo/require-utils@^55.0.5":
+  version "55.0.5"
+  resolved "https://registry.yarnpkg.com/@expo/require-utils/-/require-utils-55.0.5.tgz#50ac2bd7fa74d8c55749c88c2bef19d4d23e0b84"
+  integrity sha512-U4K/CQ2VpXuwfNGsN+daKmYOt15hCP8v/pXaYH6eut7kdYZo6SfJ1yr67BIcJ+1Gzzs+QzTxswAZChKpXmceyw==
+  dependencies:
+    "@babel/code-frame" "^7.20.0"
+    "@babel/core" "^7.25.2"
+    "@babel/plugin-transform-modules-commonjs" "^7.24.8"
+
 "@expo/schema-utils@^0.1.8":
   version "0.1.8"
   resolved "https://registry.npmjs.org/@expo/schema-utils/-/schema-utils-0.1.8.tgz"
@@ -2679,9 +2688,9 @@ expo-asset@~12.0.12:
     "@expo/image-utils" "^0.8.8"
     expo-constants "~18.0.12"
 
-expo-av@~16.0.8:
+expo-av@^16.0.8:
   version "16.0.8"
-  resolved "https://registry.npmjs.org/expo-av/-/expo-av-16.0.8.tgz"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-16.0.8.tgz#b1671127f3b2ecaeb9c69fc2301cf791d4504dd6"
   integrity sha512-cmVPftGR/ca7XBgs7R6ky36lF3OC0/MM/lpgX/yXqfv0jASTsh7AYX9JxHCwFmF+Z6JEB1vne9FDx4GiLcGreQ==
 
 expo-constants@~18.0.10, expo-constants@~18.0.12, expo-constants@~18.0.13:
@@ -2791,6 +2800,16 @@ expo-modules-autolinking@3.0.24:
     commander "^7.2.0"
     require-from-string "^2.0.2"
     resolve-from "^5.0.0"
+
+expo-modules-autolinking@^55.0.21:
+  version "55.0.21"
+  resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-55.0.21.tgz#e33faea944c68f7e4dedebef5531c754bdd888fa"
+  integrity sha512-P9KsJgOwI7JVwxmGfRvcXkXO4LNRvHRdWmb4ukLmX15G/vZ7b6SM17yiYkPceWq1F5KeeZ11KFjEcl0y17xy7w==
+  dependencies:
+    "@expo/require-utils" "^55.0.5"
+    "@expo/spawn-async" "^1.7.2"
+    chalk "^4.1.0"
+    commander "^7.2.0"
 
 expo-modules-core@3.0.29:
   version "3.0.29"

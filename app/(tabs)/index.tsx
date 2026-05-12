@@ -63,9 +63,8 @@ export default function HomeScreen() {
         <View style={styles.textBlock}>
           <Text style={styles.introText}>
             Avec EquiMood, transforme tes émotions en confiance et{' '}
-            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.{'\n'}</Text>
-            <Text style={styles.introTextAccent}>{'Car… '}</Text>
-            <Text style={styles.sloganInline}>« Ce que tu ressens, il le reflète. »</Text>
+            <Text style={styles.introTextAccent}>fais de ton mental ton plus grand allié.{"\n"}</Text>
+            <Text style={styles.introTextAccent}>Car... ce que tu ressens, il le reflète.</Text>
           </Text>
         </View>
 
@@ -75,26 +74,25 @@ export default function HomeScreen() {
           <Text style={styles.launchBannerTitle}>Lancement EquiMood — Accès libre offert</Text>
           <Text style={styles.launchBannerText}>
             Pour fêter notre naissance, tous les modules sont accessibles gratuitement jusqu'au{' '}
-            <Text style={styles.launchBannerDate}>1er juin 2026</Text>.{'\n'}
-            Profites-en maintenant, avant le passage en version Premium. 💛
+            <Text style={styles.launchBannerDate}>1er juin 2026</Text>.{"\n"}
+            Profite-en maintenant, avant le passage en version Premium. 💛
           </Text>
         </View>
 
-        {/* Bouton Mon profil avec encore plus d'espace */}
-        <Pressable style={[styles.profileButton, { marginTop: 32 }]} onPress={() => router.push('/profile')}>
-          <Text style={styles.profileButtonText}>Mon profil</Text>
-        </Pressable>
-
-        {/* Bouton pour accéder à l'écran de partage */}
-        <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 28 }]} onPress={() => router.push('/(tabs)/share')}>
-          <Text style={styles.shareButtonText}>Découvrir et installer EquiMood</Text>
-        </Pressable>
-
-        {/* Bouton EquiMood PLUS */}
-        <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
-          <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
-        </Pressable>
-        <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi</Text>
+        {/* Boutons principaux */}
+        <View style={{ alignItems: 'center', width: '100%' }}>
+          <Pressable style={[styles.profileButton, { marginTop: 32 }]} onPress={() => router.push('/profile')}>
+            <Text style={styles.profileButtonText}>Mon profil</Text>
+          </Pressable>
+          <Pressable style={[styles.shareButton, { marginTop: 12, marginBottom: 16 }]} onPress={() => router.push('/(tabs)/share')}>
+            <Text style={styles.shareButtonText}>Découvrir et installer EquiMood</Text>
+          </Pressable>
+          {/* Bouton EquiMood PLUS centré */}
+          <Pressable onPress={() => router.push('/equimood-plus' as any)} style={styles.plusLogoButton}>
+            <Text style={styles.plusLogoText}>✦ EquiMood <Text style={styles.plusLogoPlus}>PLUS</Text> ✦</Text>
+          </Pressable>
+          <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi !</Text>
+        </View>
       </ScrollView>
 
       {/* Modale de bienvenue — affichée une seule fois */}

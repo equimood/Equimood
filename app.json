@@ -15,7 +15,6 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.emiliecolli.EquiMood",
-      "jsEngine": "jsc",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
