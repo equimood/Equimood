@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 20,
+    alignSelf: 'flex-start',
   },
   backText: {
     fontSize: 15,
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
     color: '#8B6D47',
     marginBottom: 14,
     marginTop: 8,
+    textAlign: 'center',
   },
   accentBox: {
     backgroundColor: '#FFF8EE',
@@ -209,6 +211,7 @@ const styles = StyleSheet.create({
   },
   faqItem: {
     marginBottom: 22,
+    alignItems: 'center',
   },
   faqQuestion: {
     fontSize: 16,
@@ -216,12 +219,14 @@ const styles = StyleSheet.create({
     color: '#A8782A',
     marginBottom: 8,
     lineHeight: 24,
+    textAlign: 'center',
   },
   faqAnswer: {
     fontSize: 15,
     lineHeight: 25,
     color: '#6B4D27',
     fontFamily: 'Lato_400Regular',
+    textAlign: 'center',
   },
   closing: {
     fontSize: 16,
