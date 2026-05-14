@@ -2,7 +2,7 @@ import { Spacing } from '@/constants/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -20,6 +20,10 @@ export default function HomeScreen() {
   const handleCloseWelcome = async () => {
     await AsyncStorage.setItem('welcome_shown', 'true');
     setShowWelcome(false);
+  };
+
+  const handleEmailPress = () => {
+    Linking.openURL('mailto:emiliecolli@orange.fr?subject=Contact EquiMood');
   };
 
   useEffect(() => {
@@ -93,6 +97,26 @@ export default function HomeScreen() {
           </Pressable>
           <Text style={styles.plusLogoSub}>Un audio créé rien que pour toi !</Text>
         </View>
+
+        {/* Section Support & Contact */}
+        <View style={styles.supportSection}>
+          <View style={styles.supportDivider} />
+          <Text style={styles.supportTitle}>Besoin d'aide ?</Text>
+          <Text style={styles.supportText}>
+            Nous sommes là pour t'accompagner.{'\n'}
+            Une question, une suggestion ou un souci technique ?
+          </Text>
+          <View style={styles.supportLinks}>
+            <Pressable onPress={() => router.push('/support')} style={styles.supportButton}>
+              <Text style={styles.supportButtonText}>Centre d'aide</Text>
+            </Pressable>
+            <Pressable onPress={handleEmailPress} style={styles.supportButton}>
+              <Text style={styles.supportButtonText}>Nous contacter</Text>
+            </Pressable>
+          </View>
+          <Text style={styles.supportCopyright}>© 2026 EquiMood — Tous droits réservés</Text>
+        </View>
+
       </ScrollView>
 
       {/* Modale de bienvenue — affichée une seule fois */}
@@ -125,7 +149,7 @@ const styles = StyleSheet.create({
   content: {
     flexGrow: 1,
     paddingHorizontal: Spacing.lg,
-    paddingTop: 80, // Ajoute un espace en haut pour descendre le contenu
+    paddingTop: 80,
     paddingBottom: Spacing.xl * 3,
   },
   topLogoContainer: {
@@ -384,5 +408,60 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     fontFamily: 'PlayfairDisplay_700Bold',
+  },
+  supportSection: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 50,
+    paddingHorizontal: 20,
+  },
+  supportDivider: {
+    height: 1.5,
+    backgroundColor: '#E8D5B0',
+    width: '60%',
+    marginBottom: 28,
+    borderRadius: 2,
+  },
+  supportTitle: {
+    fontSize: 18,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    color: '#8B6D47',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  supportText: {
+    fontSize: 14,
+    lineHeight: 22,
+    color: '#6B4D27',
+    fontFamily: 'Lato_400Regular',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  supportLinks: {
+    flexDirection: 'row',
+    gap: 16,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: 24,
+  },
+  supportButton: {
+    backgroundColor: '#FFF8EE',
+    borderWidth: 1.5,
+    borderColor: '#C6A45D',
+    paddingVertical: 10,
+    paddingHorizontal: 22,
+    borderRadius: 20,
+  },
+  supportButtonText: {
+    fontSize: 14,
+    fontFamily: 'Lato_700Bold',
+    color: '#A8782A',
+  },
+  supportCopyright: {
+    fontSize: 12,
+    fontFamily: 'Lato_400Regular',
+    color: '#8B6D47',
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
 });
