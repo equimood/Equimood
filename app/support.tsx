@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SupportScreen() {
@@ -10,13 +10,23 @@ export default function SupportScreen() {
     Linking.openURL('mailto:equimood.app@gmail.com?subject=Support EquiMood');
   };
 
+  const handleHomePress = () => {
+    if (Platform.OS === 'web') {
+      // Sur le web, redirection vers la page d'accueil du site
+      window.location.href = 'https://equimood.fr';
+    } else {
+      // Sur mobile, retour à la page d'accueil de l'app
+      router.push('/(tabs)');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
 
-        {/* Bouton retour */}
-        <Pressable onPress={() => router.back()} style={styles.backButton}>
-          <Text style={styles.backText}>← Retour</Text>
+        {/* Bouton Accueil */}
+        <Pressable onPress={handleHomePress} style={styles.homeButton}>
+          <Text style={styles.homeText}>🏠 Accueil</Text>
         </Pressable>
 
         {/* Titre */}
@@ -131,11 +141,11 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 60,
   },
-  backButton: {
+  homeButton: {
     marginBottom: 20,
     alignSelf: 'flex-start',
   },
-  backText: {
+  homeText: {
     fontSize: 15,
     color: '#A8782A',
     fontFamily: 'PlayfairDisplay_700Bold',
