@@ -114,6 +114,9 @@ export default function HomeScreen() {
               <Text style={styles.supportButtonText}>Nous contacter</Text>
             </Pressable>
           </View>
+          <Pressable onPress={handleEmailPress}>
+            <Text style={styles.supportEmail}>📧 emiliecolli@orange.fr</Text>
+          </Pressable>
           <Text style={styles.supportCopyright}>© 2026 EquiMood — Tous droits réservés</Text>
         </View>
 
@@ -442,7 +445,7 @@ const styles = StyleSheet.create({
     gap: 16,
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginBottom: 24,
+    marginBottom: 18,
   },
   supportButton: {
     backgroundColor: '#FFF8EE',
@@ -456,6 +459,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Lato_700Bold',
     color: '#A8782A',
+  },
+  supportEmail: {
+    fontSize: 14,
+    fontFamily: 'Lato_400Regular',
+    color: '#A8782A',
+    textAlign: 'center',
+    marginBottom: 20,
   },
   supportCopyright: {
     fontSize: 12,
