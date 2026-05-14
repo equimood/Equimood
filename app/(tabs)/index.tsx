@@ -23,7 +23,7 @@ export default function HomeScreen() {
   };
 
   const handleEmailPress = () => {
-    Linking.openURL('mailto:emiliecolli@orange.fr?subject=Contact EquiMood');
+    Linking.openURL('mailto:equimood.app@gmail.com?subject=Contact EquiMood');
   };
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function HomeScreen() {
             </Pressable>
           </View>
           <Pressable onPress={handleEmailPress}>
-            <Text style={styles.supportEmail}>📧 emiliecolli@orange.fr</Text>
+            <Text style={styles.supportEmail}>📧 equimood.app@gmail.com</Text>
           </Pressable>
           <Text style={styles.supportCopyright}>© 2026 EquiMood — Tous droits réservés</Text>
         </View>

@@ -7,7 +7,7 @@ export default function SupportScreen() {
   const router = useRouter();
 
   const handleEmailPress = () => {
-    Linking.openURL('mailto:emiliecolli@orange.fr?subject=Support EquiMood');
+    Linking.openURL('mailto:equimood.app@gmail.com?subject=Support EquiMood');
   };
 
   return (
@@ -41,7 +41,7 @@ export default function SupportScreen() {
             Nous te répondons sous 48h ouvrées.
           </Text>
           <Pressable onPress={handleEmailPress} style={styles.emailButton}>
-            <Text style={styles.emailButtonText}>📧 emiliecolli@orange.fr</Text>
+            <Text style={styles.emailButtonText}>📧 equimood.app@gmail.com</Text>
           </Pressable>
         </View>
 
@@ -77,7 +77,7 @@ export default function SupportScreen() {
           <Text style={styles.faqQuestion}>✦ Comment supprimer mon compte ?</Text>
           <Text style={styles.faqAnswer}>
             Pour supprimer définitivement ton compte et toutes tes données associées,
-            envoie un email à emiliecolli@orange.fr avec pour objet "Suppression de compte".
+            envoie un email à equimood.app@gmail.com avec pour objet "Suppression de compte".
             Ta demande sera traitée sous 48h.
           </Text>
         </View>
