@@ -2,9 +2,9 @@
   "expo": {
     "name": "EquiMood",
     "slug": "EquiMood",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-  "icon": "./assets/images/ce_que_tu_ressens_2.png",
+    "icon": "./assets/images/ce_que_tu_ressens_2.png",
     "scheme": "equimood",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -37,10 +37,7 @@
       "themeColor": "#C9A86A",
       "backgroundColor": "#FFFCF7"
     },
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     },
