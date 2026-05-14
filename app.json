@@ -2,7 +2,7 @@
   "expo": {
     "name": "EquiMood",
     "slug": "EquiMood",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/ce_que_tu_ressens_2.png",
     "scheme": "equimood",
