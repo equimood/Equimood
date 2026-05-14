@@ -117,6 +117,9 @@ export default function HomeScreen() {
           <Pressable onPress={handleEmailPress}>
             <Text style={styles.supportEmail}>📧 equimood.app@gmail.com</Text>
           </Pressable>
+          <Pressable onPress={() => router.push('/privacy')}>
+            <Text style={styles.supportPrivacy}>Politique de confidentialité</Text>
+          </Pressable>
           <Text style={styles.supportCopyright}>© 2026 EquiMood — Tous droits réservés</Text>
         </View>
 
@@ -466,6 +469,14 @@ const styles = StyleSheet.create({
     color: '#A8782A',
     textAlign: 'center',
     marginBottom: 20,
+  },
+  supportPrivacy: {
+    fontSize: 13,
+    fontFamily: 'Lato_400Regular',
+    color: '#A8782A',
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    marginBottom: 12,
   },
   supportCopyright: {
     fontSize: 12,
