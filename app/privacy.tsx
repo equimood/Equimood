@@ -116,8 +116,12 @@ export default function PrivacyScreen() {
         {/* Section 10 */}
         <Text style={styles.sectionTitle}>10. Enfants et adolescents</Text>
         <Text style={styles.bodyText}>
-          EquiMood s'adresse à un public adulte, en particulier les cavalières souhaitant travailler leur préparation mentale.{'\n\n'}
-          L'application ne collectant aucune donnée personnelle, elle ne présente pas de risque spécifique pour les mineurs.
+          L’application EquiMood est accessible aux personnes majeures ainsi qu’aux mineurs âgés d’au moins 15 ans. Lorsque la législation applicable l’exige, l’utilisation par un mineur suppose l’autorisation préalable de son représentant légal.{'\n\n'}
+          EquiMood propose des contenus audios de préparation mentale et de bien-être destinés principalement au monde équestre. L’application s’adresse prioritairement à un public adulte, mais peut également être utilisée par des mineurs disposant de la maturité nécessaire à cet usage, sous la responsabilité de leurs représentants légaux.{'\n\n'}
+          Les représentants légaux sont invités à s’assurer que l’utilisation de l’application est adaptée à l’âge, à la sensibilité et aux besoins du mineur.{'\n\n'}
+          Le mineur utilisateur déclare disposer de l’autorisation de son représentant légal, l’éditeur ne pouvant en vérifier systématiquement la réalité.{'\n\n'}
+          EquiMood ne propose aucun contenu à caractère médical, psychologique ou thérapeutique et ne se substitue en aucun cas à un accompagnement médical, psychologique ou professionnel adapté.{'\n\n'}
+          Les éventuels traitements de données liés au fonctionnement technique de l’application, aux abonnements ou aux statistiques d’utilisation sont encadrés conformément à la politique de confidentialité applicable.{'\n\n'}
         </Text>
 
         {/* Section 11 */}
