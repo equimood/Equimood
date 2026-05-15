@@ -16,7 +16,8 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.emiliecolli.EquiMood",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryUsageDescription": "EquiMood te permet de choisir une photo depuis ta galerie pour personnaliser ton profil de cavalière (par exemple une photo avec ton cheval). La photo est stockée uniquement sur ton iPhone, elle n'est jamais envoyée à un serveur ni partagée avec des tiers."
       }
     },
     "android": {
