@@ -40,7 +40,7 @@ export default function PrivacyScreen() {
         {/* Introduction */}
         <Text style={styles.intro}>
           Chez EquiMood, nous attachons une grande importance à la confidentialité et à la sécurité de tes données personnelles.
-          Cette politique explique de manière transparente comment notre application gère tes informations.
+          Cette politique explique de manière transparente comment notre application gère tes informations...
         </Text>
 
         {/* Section 1 */}
